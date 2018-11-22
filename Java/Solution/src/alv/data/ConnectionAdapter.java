@@ -13,11 +13,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ConnectionAdapter {
-	// private static final String DEFAULT_URL = "jdbc:odbc:Driver={Microsoft Access
-	// Driver (*.mdb)}; DBQ=C:\\UQO\\2018-3-INF1163-01 Modélisation et conception
-	// orientée objet\\Java\\SQLProject\\data\\alv.mdb;";
-	// private static final String SQL_FIND_ALL_EVENTS = "SELECT * FROM tblClient";
-
 	protected Connection connection;
 
 	public ConnectionAdapter(Connection connection) {

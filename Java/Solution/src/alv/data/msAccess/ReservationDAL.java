@@ -24,9 +24,8 @@ public class ReservationDAL extends ConnectionAdapter implements IReservationDAL
 		Statement st = null;
 		ResultSet rs = null;
 		try {
-			CallableStatement cstmt = connection.prepareCall("{call qryClient(?)}");
-
-			cstmt.setString("id", "" + id);
+			CallableStatement cstmt = connection.prepareCall("SELECT * FROM tblReservation WHERE Id = ?");
+			cstmt.setInt(1,id);
 			boolean state = cstmt.execute();
 			int rowsAffected = 0;
 
@@ -49,7 +48,7 @@ public class ReservationDAL extends ConnectionAdapter implements IReservationDAL
 			close(rs);
 			close(st);
 		}
-		return results.get(0);
+		return  results.isEmpty() ? null : results.get(0);
 	}
 
 }

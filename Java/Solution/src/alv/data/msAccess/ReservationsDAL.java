@@ -20,8 +20,23 @@ public class ReservationsDAL extends ConnectionAdapter implements IReservationsD
 		Statement st = null;
 		ResultSet rs = null;
 		try {
-			st = this.connection.createStatement();
-			rs = st.executeQuery("SELECT * FROM tblReservation");
+//			st = this.connection.createStatement();
+//			rs = st.executeQuery("SELECT * FROM tblReservation");
+			CallableStatement cstmt = connection.prepareCall("SELECT * FROM tblReservation");
+			boolean state = cstmt.execute();
+			int rowsAffected = 0;
+
+			// Protects against lack of SET NOCOUNT in stored prodedure
+			while (state || rowsAffected != -1) {
+				if (state) {
+					rs = cstmt.getResultSet();
+					break;
+				} else {
+					rowsAffected = cstmt.getUpdateCount();
+				}
+				state = cstmt.getMoreResults();
+			}
+			
 			results = map(rs);
 		} catch (SQLException e) {
 			e.printStackTrace();

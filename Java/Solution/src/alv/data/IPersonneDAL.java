@@ -1,8 +1,8 @@
 package alv.data;
 
-import java.util.Map;
-
-public interface IPersonneDAL {
-
-	public Map<String, Object> fetch(int id);
+public interface IPersonneDAL {	
+	public PersonneDto fetch(int id);
+	public int insert(PersonneDto dto);
+	public void update(PersonneDto dto);
+	public boolean delete(int id);
 }

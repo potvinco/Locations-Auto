@@ -24,44 +24,50 @@ public class Reservation {
 
 	Connection conn;
 	private ReservationDAL dal;
+
 	// CONSTRUCTOR
 	private Reservation() {
 		initConnection();
 	}
-	
-	private Reservation(int id) {		
+
+	private Reservation(int id) {
 		initConnection();
 		dal = new ReservationDAL(conn);
-		loadProperties(dal.fetch(id));		
+		Map<String, Object> map = dal.fetch(id);
+		this.loadProperties(map);
 	}
 
 	// METHODS
 	private void loadProperties(Map<String, Object> data) {
-		setId((int) data.get("Id"));
-		setPersonneId((int) data.get("PersonneId"));
-		setStartDt((Date) data.get("StartDt"));
-		setEndDt((Date) data.get("EndDt"));
-		setCategoryId((int) data.get("CategoryId"));
-		setAssuranceOption((boolean) data.get("AssuranceOptionId"));
-		setKmOption((boolean) data.get("KmOptionId"));
-		setLastUpdated((Date) data.get("LastUpdated"));
-		setUpdatedBy((String) data.get("UpdatedBy"));
+		try {
+			this.setId((int) data.get("ID"));
+			this.setPersonneId((int) data.get("PERSONNEID"));
+			this.setStartDt((Date) data.get("STARTDT"));
+			this.setEndDt((Date) data.get("ENDDT"));
+			this.setCategoryId((int) data.get("CATEGORYID"));
+			this.setAssuranceOption((boolean) data.get("ASSURANCEOPTIONID"));
+			this.setKmOption((boolean) data.get("KMOPTIONID"));
+			this.setLastUpdated((Date) data.get("LASTUPDATED"));
+			this.setUpdatedBy((String) data.get("UPDATEDBY"));
+		} catch (NullPointerException ex) {
+
+		}
 	}
-	
+
 	private void initConnection() {
 		try {
-			if(conn == null) {
+			if (conn == null) {
 				String dbSettingsPropertyFile = "./properties/AppSettings.properties";
 				Properties props = new Properties();
-		
+
 				FileReader fReader;
 				fReader = new FileReader(dbSettingsPropertyFile);
 				props.load(fReader);
-		
+
 				String driver = props.getProperty("db.driver.class");
 				String msAccDB = props.getProperty("db.path");
 				String dbURL = props.getProperty("db.conn.url") + msAccDB;
-		
+
 				conn = ReservationDAL.createConnection(driver, dbURL, null, null);
 			}
 		} catch (ClassNotFoundException | SQLException | IOException e) {
@@ -69,23 +75,21 @@ public class Reservation {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static Reservation load(Map<String, Object> data) {
 		Reservation res = new Reservation();
 		res.loadProperties(data);
-		
 		return res;
 	}
-	
-	public static Reservation load(int id)
-	{
+
+	public static Reservation load(int id) {
 		return new Reservation(id);
 	}
-	
+
 	public static Reservation create() {
 		return new Reservation();
 	}
-	
+
 	public void delete() {
 
 	}

@@ -49,7 +49,8 @@ public class AdresseDAL extends ConnectionAdapter implements IAdresseDAL {
 			close(rs);
 			close(st);
 		}
-		return results.get(0);
+
+		return  results.isEmpty() ? null : results.get(0);
 	}
 
 }
