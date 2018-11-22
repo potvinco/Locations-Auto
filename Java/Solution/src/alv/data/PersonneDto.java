@@ -76,7 +76,8 @@ public class PersonneDto {
 			setNom((String) data.get("NOM"));
 			setPrenom((String) data.get("PRENOM"));
 			setTelephone((String) data.get("TELEPHONE"));
-			setDateNaissance(Date.valueOf(((Timestamp) data.get("DATENAISSANCE")).toLocalDateTime().toLocalDate()));
+			setDateNaissance(data.get("DATENAISSANCE") == null ? null
+					:Date.valueOf(((Timestamp) data.get("DATENAISSANCE")).toLocalDateTime().toLocalDate()));
 
 			// setLastUpdated((Date) data.get("LASTUPDATED"));
 			setLastUpdated(data.get("LASTUPDATED") == null ? null

@@ -4,8 +4,8 @@ import alv.lib.Reservations;
 
 public class Main {
 	public static void main(String[] args) {
-		Test_Reservations();
-		Test_Reservation();
+//		Test_Reservations();
+//		Test_Reservation();
 		Test_Personne();
 	}
 	
