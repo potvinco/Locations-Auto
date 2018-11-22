@@ -102,31 +102,31 @@ public class PersonneDAL extends ConnectionAdapter implements IPersonneDAL {
 				cstmt.setString(3, dto.getTelephone());
 				cstmt.setDate(4, (Date) dto.getDateNaissance());
 				cstmt.executeUpdate();
+				//ResultSet rst = cstmt.getGeneratedKeys();
 				
 				
 				
 				
+				cstmt = connection.prepareCall("SELECT TOP 1 * FROM tblPersonne ORDER BY Id DESC");
 				
-//				cstmt = connection.prepareCall("SELECT TOP 1 * FROM tblPersonne ORDER BY Id DESC");
+				boolean state = cstmt.execute();
+				int rowsAffected = 0;
+
+				// Protects against lack of SET NOCOUNT in stored prodedure
+				while (state || rowsAffected != -1) {
+					if (state) {
+						rs = cstmt.getResultSet();
+						break;
+					} else {
+						rowsAffected = cstmt.getUpdateCount();
+					}
+					state = cstmt.getMoreResults();
+				}
+
 //				
-//				boolean state = cstmt.execute();
-//				int rowsAffected = 0;
-//
-//				// Protects against lack of SET NOCOUNT in stored prodedure
-//				while (state || rowsAffected != -1) {
-//					if (state) {
-//						rs = cstmt.getResultSet();
-//						break;
-//					} else {
-//						rowsAffected = cstmt.getUpdateCount();
-//					}
-//					state = cstmt.getMoreResults();
-//				}
-//
-////				ResultSet rst = cstmt.getGeneratedKeys();
-//				
-//				results = map(rs);
-//				dto.loadProperties(results.isEmpty() ? null : results.get(0));
+				
+				results = map(rs);
+				//dto.loadProperties(results.isEmpty() ? null : results.get(0));
 				
 				
 				
@@ -135,7 +135,7 @@ public class PersonneDAL extends ConnectionAdapter implements IPersonneDAL {
 				
 				
 				
-				return 0;
+				return results.isEmpty() ? 0 : (int)results.get(0).get("ID");
 				
 
 			} catch (SQLException e) {
