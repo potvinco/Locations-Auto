@@ -6,6 +6,7 @@ import java.util.Map;
 
 public class PersonneDto {
 	private int _id;
+	private int _adresseId;
 	private String _nom;
 	private String _prenom;
 	private String _telephone;
@@ -70,19 +71,27 @@ public class PersonneDto {
 		this._lastUpdated = _lastUpdated;
 	}
 
+	
+	//METHODS
 	public void loadProperties(Map<String, Object> data) {
 		if (data != null) {
 			setId((int) data.get("ID"));
 			setNom((String) data.get("NOM"));
 			setPrenom((String) data.get("PRENOM"));
 			setTelephone((String) data.get("TELEPHONE"));
-			setDateNaissance(data.get("DATENAISSANCE") == null ? null
-					:Date.valueOf(((Timestamp) data.get("DATENAISSANCE")).toLocalDateTime().toLocalDate()));
+			setDateNaissance(data.get("DATENAISSANCE") == null ? null : Date.valueOf(((Timestamp) data.get("DATENAISSANCE")).toLocalDateTime().toLocalDate()));
 
 			// setLastUpdated((Date) data.get("LASTUPDATED"));
-			setLastUpdated(data.get("LASTUPDATED") == null ? null
-					: (Date) Date.valueOf(((Timestamp) data.get("LASTUPDATED")).toLocalDateTime().toLocalDate()));
+			setLastUpdated(data.get("LASTUPDATED") == null ? null : Date.valueOf(((Timestamp) data.get("LASTUPDATED")).toLocalDateTime().toLocalDate()));
 			setUpdatedBy((String) data.get("UPDATEDBY"));
 		}
+	}
+
+	public int getAdresseId() {
+		return _adresseId;
+	}
+
+	public void setAdresseId(int _adresseId) {
+		this._adresseId = _adresseId;
 	}
 }

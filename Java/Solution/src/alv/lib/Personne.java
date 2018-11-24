@@ -14,27 +14,31 @@ import alv.data.msAccess.PersonneDAL;
 public class Personne {
 
 	private PersonneDto _dto = new PersonneDto();
+	private Adresse _adresse;
 	Connection conn;
 	private PersonneDAL dal;
 
+	//PROPERTIES
+	public PersonneDto getDto() {return _dto;}
+	private void setDto(PersonneDto dto) {_dto = dto;}
+
+	public Adresse getAdresse() {return _adresse;}
+	private void setAdresse(Adresse adresse) {_adresse = adresse;}
+	
 	// CONSTRUCTOR
 	private Personne() {
 		initConnection();
 		dal = new PersonneDAL(conn);
+		
+		_adresse = Adresse.create();
 	}
 
 	private Personne(int id) {
 		initConnection();
 		dal = new PersonneDAL(conn);
 		_dto = dal.fetch(id);
-	}
-
-	public PersonneDto getDto() {
-		return _dto;
-	}
-
-	private void setDto(PersonneDto dto) {
-		_dto = dto;
+		
+		setAdresse(Adresse.load(_dto.getAdresseId()));
 	}
 
 	// METHODS
@@ -62,8 +66,11 @@ public class Personne {
 
 	protected static Personne load(PersonneDto dto) {
 		Personne res = new Personne();
-		// res.loadProperties(data);
 		res.setDto(dto);
+
+		if(res.getDto().getAdresseId()>0)
+			res.setAdresse(Adresse.load(res.getDto().getAdresseId()));
+		
 		return res;
 	}
 
@@ -76,6 +83,11 @@ public class Personne {
 	}
 
 	public void save() {
+
+		if(getAdresse()!=null) {
+			getAdresse().save();
+			_dto.setAdresseId(getAdresse().getDto().getId());
+		}
 		if(_dto.getId()==0) {
 			int id = dal.insert(_dto);
 			_dto.setId(id);
@@ -88,10 +100,11 @@ public class Personne {
 		int id = _dto.getId();
 
 		if (id != 0) {
+
 			if (dal.delete(id)) {
 				_dto.setId(0);
+				getAdresse().delete();
 			}
 		}
-
 	}
 }

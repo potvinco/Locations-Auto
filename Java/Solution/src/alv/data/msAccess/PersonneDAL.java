@@ -60,33 +60,6 @@ public class PersonneDAL extends ConnectionAdapter implements IPersonneDAL {
 	}
 
 	@Override
-	public void update(PersonneDto dto) {
-		if (dto != null) {
-			Statement st = null;
-			ResultSet rs = null;
-			try {
-
-				CallableStatement cstmt = connection.prepareCall(
-						"UPDATE tblPersonne SET Nom = ?, Prenom = ?, Telephone = ?, DateNaissance = ? WHERE Id = ?");
-
-				cstmt.setString(1, dto.getNom());
-				cstmt.setString(2, dto.getPrenom());
-				cstmt.setString(3, dto.getTelephone());
-				cstmt.setDate(4, (Date) dto.getDateNaissance());
-				cstmt.setInt(5, dto.getId());
-				cstmt.executeUpdate();
-
-			} catch (SQLException e) {
-				e.printStackTrace();
-				throw new RuntimeException(e);
-			} finally {
-				close(rs);
-				close(st);
-			}
-		}
-	}
-
-	@Override
 	public int insert(PersonneDto dto) {
 		if (dto != null) {
 			List<Map<String, Object>> results = new ArrayList<Map<String, Object>>();
@@ -95,20 +68,22 @@ public class PersonneDAL extends ConnectionAdapter implements IPersonneDAL {
 			try {
 
 				CallableStatement cstmt = connection.prepareCall(
-						"INSERT INTO tblPersonne ( Nom, Prenom, Telephone, DateNaissance) VALUES( ?, ?, ?, ?)");
+						"INSERT INTO tblPersonne ( Nom, Prenom, Telephone, DateNaissance, AdresseId) VALUES( ?, ?, ?, ?, ?)");
 
 				cstmt.setString(1, dto.getNom());
 				cstmt.setString(2, dto.getPrenom());
 				cstmt.setString(3, dto.getTelephone());
 				cstmt.setDate(4, (Date) dto.getDateNaissance());
+				cstmt.setInt(5, dto.getAdresseId());
 				cstmt.executeUpdate();
-				//ResultSet rst = cstmt.getGeneratedKeys();
-				
-				
-				
-				
+
+				// SELECT NEW ID
+				// This is a BAD implementation but with this driver it is not possible:
+				// - call MSAccess query
+				// - obtain the new id using SELECT @@IDENTITY after INSERT
+				//
 				cstmt = connection.prepareCall("SELECT TOP 1 * FROM tblPersonne ORDER BY Id DESC");
-				
+
 				boolean state = cstmt.execute();
 				int rowsAffected = 0;
 
@@ -123,20 +98,8 @@ public class PersonneDAL extends ConnectionAdapter implements IPersonneDAL {
 					state = cstmt.getMoreResults();
 				}
 
-//				
-				
 				results = map(rs);
-				//dto.loadProperties(results.isEmpty() ? null : results.get(0));
-				
-				
-				
-				
-				
-				
-				
-				
-				return results.isEmpty() ? 0 : (int)results.get(0).get("ID");
-				
+				return results.isEmpty() ? 0 : (int) results.get(0).get("ID");
 
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -147,6 +110,34 @@ public class PersonneDAL extends ConnectionAdapter implements IPersonneDAL {
 			}
 		}
 		return 0;
+	}
+	
+	@Override
+	public void update(PersonneDto dto) {
+		if (dto != null) {
+			Statement st = null;
+			ResultSet rs = null;
+			try {
+
+				CallableStatement cstmt = connection.prepareCall(
+						"UPDATE tblPersonne SET Nom = ?, Prenom = ?, Telephone = ?, DateNaissance = ?, AdresseId = ? WHERE Id = ?");
+
+				cstmt.setString(1, dto.getNom());
+				cstmt.setString(2, dto.getPrenom());
+				cstmt.setString(3, dto.getTelephone());
+				cstmt.setDate(4, (Date) dto.getDateNaissance());
+				cstmt.setInt(5, dto.getAdresseId());
+				cstmt.setInt(6, dto.getId());
+				cstmt.executeUpdate();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			} finally {
+				close(rs);
+				close(st);
+			}
+		}
 	}
 
 	@Override

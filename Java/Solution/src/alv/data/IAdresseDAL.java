@@ -1,7 +1,9 @@
 package alv.data;
 
-import java.util.Map;
 
 public interface IAdresseDAL {
-	public Map<String, Object> fetch(int id);
+	public AdresseDto fetch(int id);
+	public int insert(AdresseDto dto);
+	public void update(AdresseDto dto);
+	public boolean delete(int id);
 }
