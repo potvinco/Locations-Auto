@@ -1,26 +1,37 @@
 package alv.data.msAccess;
 
-import java.sql.*;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import alv.data.ConnectionAdapter;
-import alv.data.IReservationsDAL;
+import alv.data.IReservationValidatorDAL;
+import alv.data.PersonneDto;
 
-public class ReservationsDAL extends ConnectionAdapter implements IReservationsDAL {
+public class ReservationValidatorDAL extends ConnectionAdapter implements IReservationValidatorDAL{
 
-	public ReservationsDAL(Connection connection) {
+	public ReservationValidatorDAL(Connection connection) {
 		super(connection);
 	}
-
+	
 	@Override
-	public List<Map<String, Object>> fetch() {
+	public int fetch(int categoryId, Date startDt, Date endDt) {
 		List<Map<String, Object>> results = new ArrayList<Map<String, Object>>();
 		Statement st = null;
 		ResultSet rs = null;
 		try {
-			CallableStatement cstmt = connection.prepareCall("SELECT * FROM tblReservation");
+
+			CallableStatement cstmt = connection.prepareCall("SELECT * FROM tblPersonne WHERE Id = ?");
+			cstmt.setInt(1, categoryId);
+			cstmt.setDate(2, startDt);
+			cstmt.setDate(3, endDt);
+
 			boolean state = cstmt.execute();
 			int rowsAffected = 0;
 
@@ -36,6 +47,7 @@ public class ReservationsDAL extends ConnectionAdapter implements IReservationsD
 			}
 
 			results = map(rs);
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
@@ -43,6 +55,8 @@ public class ReservationsDAL extends ConnectionAdapter implements IReservationsD
 			close(rs);
 			close(st);
 		}
-		return results;
+
+		return results.isEmpty() ? 0 : (int)results.get(0).get("COUNT");
 	}
+
 }

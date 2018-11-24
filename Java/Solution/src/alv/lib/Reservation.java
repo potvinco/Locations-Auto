@@ -8,52 +8,42 @@ import java.util.Date;
 import java.util.Map;
 import java.util.Properties;
 
+import alv.data.PersonneDto;
+import alv.data.ReservationDto;
+import alv.data.msAccess.PersonneDAL;
 import alv.data.msAccess.ReservationDAL;
 
 public class Reservation {
 
-	private int _id;
-	private int _personneId;
-	private int _categoryId;
-	private Date _startDt;
-	private Date _endDt;
-	private boolean _assuranceOption;
-	private boolean _kmOption;
-	private String _updatedBy;
-	private Date _lastUpdated;
-
+	private Personne _personne;
+	private ReservationDto _dto = new ReservationDto();
 	Connection conn;
 	private ReservationDAL dal;
 
+	//PROPERTIES
+	public ReservationDto getDto() {return _dto;}
+	private void setDto(ReservationDto dto) {_dto = dto;}
+
+	public Personne getPersonne() {return _personne;}
+	private void setPersonne(Personne personne) {_personne = personne;}
+	
 	// CONSTRUCTOR
 	private Reservation() {
 		initConnection();
+		dal = new ReservationDAL(conn);
+		
+		_personne = Personne.create();
 	}
 
 	private Reservation(int id) {
 		initConnection();
 		dal = new ReservationDAL(conn);
-		Map<String, Object> map = dal.fetch(id);
-		this.loadProperties(map);
+		_dto = dal.fetch(id);
+
+		setPersonne(Personne.load(_dto.getPersonneId()));
 	}
 
 	// METHODS
-	private void loadProperties(Map<String, Object> data) {
-		try {
-			this.setId((int) data.get("ID"));
-			this.setPersonneId((int) data.get("PERSONNEID"));
-			this.setStartDt((Date) data.get("STARTDT"));
-			this.setEndDt((Date) data.get("ENDDT"));
-			this.setCategoryId((int) data.get("CATEGORYID"));
-			this.setAssuranceOption((boolean) data.get("ASSURANCEOPTIONID"));
-			this.setKmOption((boolean) data.get("KMOPTIONID"));
-			this.setLastUpdated((Date) data.get("LASTUPDATED"));
-			this.setUpdatedBy((String) data.get("UPDATEDBY"));
-		} catch (NullPointerException ex) {
-
-		}
-	}
-
 	private void initConnection() {
 		try {
 			if (conn == null) {
@@ -76,9 +66,20 @@ public class Reservation {
 		}
 	}
 
+	//this method will be used when the object is a child of Reservations
 	public static Reservation load(Map<String, Object> data) {
 		Reservation res = new Reservation();
-		res.loadProperties(data);
+		res.getDto().loadProperties(data);
+		
+		if(res.getDto().getPersonneId()>0)
+			res.setPersonne(Personne.load(res.getDto().getPersonneId()));
+		
+		return res;
+	}
+	
+	public static Reservation load(ReservationDto data) {
+		Reservation res = new Reservation();
+		res.setDto(data);
 		return res;
 	}
 
@@ -90,80 +91,28 @@ public class Reservation {
 		return new Reservation();
 	}
 
+	public void save() {
+
+		if(getPersonne()!=null) {
+			getPersonne().save();
+			_dto.setPersonneId(getPersonne().getDto().getId());
+		}
+		if(_dto.getId()==0) {
+			int id = dal.insert(_dto);
+			_dto.setId(id);
+		}
+		else
+			dal.update(_dto);
+	}
+
 	public void delete() {
+		int id = _dto.getId();
 
-	}
-
-	// PROPERTIES
-	public int getId() {
-		return _id;
-	}
-
-	public void setId(int _id) {
-		this._id = _id;
-	}
-
-	public Date getStartDt() {
-		return _startDt;
-	}
-
-	public void setStartDt(Date _startDt) {
-		this._startDt = _startDt;
-	}
-
-	public Date getEndDt() {
-		return _endDt;
-	}
-
-	public void setEndDt(Date _endDt) {
-		this._endDt = _endDt;
-	}
-
-	public int getCategoryId() {
-		return _categoryId;
-	}
-
-	public void setCategoryId(int _categoryId) {
-		this._categoryId = _categoryId;
-	}
-
-	public boolean getAssuranceOption() {
-		return _assuranceOption;
-	}
-
-	public void setAssuranceOption(boolean _assuranceOption) {
-		this._assuranceOption = _assuranceOption;
-	}
-
-	public boolean getKmOption() {
-		return _kmOption;
-	}
-
-	public void setKmOption(boolean _kmOption) {
-		this._kmOption = _kmOption;
-	}
-
-	public String getUpdatedBy() {
-		return _updatedBy;
-	}
-
-	public void setUpdatedBy(String _updatedBy) {
-		this._updatedBy = _updatedBy;
-	}
-
-	public Date getLastUpdated() {
-		return _lastUpdated;
-	}
-
-	public void setLastUpdated(Date _lastUpdated) {
-		this._lastUpdated = _lastUpdated;
-	}
-
-	public int getPersonneId() {
-		return _personneId;
-	}
-
-	public void setPersonneId(int _personneId) {
-		this._personneId = _personneId;
+		if (id != 0) {
+			if (dal.delete(id)) {
+				_dto.setId(0);
+				getPersonne().delete();
+			}
+		}
 	}
 }

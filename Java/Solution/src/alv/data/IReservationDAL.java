@@ -1,8 +1,8 @@
 package alv.data;
 
-import java.util.Map;
-
 public interface IReservationDAL {
-
-	public Map<String, Object> fetch(int id);
+	public ReservationDto fetch(int id);
+	public int insert(ReservationDto dto);
+	public void update(ReservationDto dto);
+	public boolean delete(int id);
 }

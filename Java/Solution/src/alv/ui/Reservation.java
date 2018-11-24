@@ -122,7 +122,7 @@ public class Reservation {
 		panel_2.setLayout(null);
 		
 		Panel panel = new Panel();
-		panel.setBounds(173, 249, 447, 611);
+		panel.setBounds(25, 151, 447, 611);
 		panel_2.add(panel);
 		panel.setBackground(Color.WHITE);
 		panel.setLayout(null);
@@ -180,7 +180,7 @@ public class Reservation {
 		panel.add(rdbtnKm);
 		
 		Panel panel_1 = new Panel();
-		panel_1.setBounds(121, 464, 182, 108);
+		panel_1.setBounds(123, 464, 182, 108);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
