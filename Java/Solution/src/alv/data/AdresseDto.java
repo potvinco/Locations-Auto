@@ -14,24 +14,63 @@ public class AdresseDto {
 	private Date _lastUpdated;
 
 	// PROPERTIES
-	public int getId() { return _id; }
-	public void setId(int _id) { this._id = _id; }
+	public int getId() {
+		return _id;
+	}
 
-	public String getAdresse() { return _adresse; }
-	public void setAdresse(String _adresse) { this._adresse = _adresse; }
-	public String getVille() { return _ville; }
-	public void setVille(String _ville) { this._ville = _ville; }
-	public String getCodePostal() { return _codePostal; 	}
-	public void setCodePostal(String _codePostal) { this._codePostal = _codePostal; }
-	public String getProvince() { return _province; 	}
-	public void setProvince(String _province) { this._province = _province; }
-	
-	public String getUpdatedBy() {return _updatedBy;}
-	public void setUpdatedBy(String _updatedBy) {this._updatedBy = _updatedBy;}
-	public Date getLastUpdated() {return _lastUpdated;}
-	public void setLastUpdated(Date _lastUpdated) {this._lastUpdated = _lastUpdated;}
+	protected void setId(int _id) {
+		this._id = _id;
+	}
 
-	//METHODS
+	public String getAdresse() {
+		return _adresse;
+	}
+
+	public void setAdresse(String _adresse) {
+		this._adresse = _adresse;
+	}
+
+	public String getVille() {
+		return _ville;
+	}
+
+	public void setVille(String _ville) {
+		this._ville = _ville;
+	}
+
+	public String getCodePostal() {
+		return _codePostal;
+	}
+
+	public void setCodePostal(String _codePostal) {
+		this._codePostal = _codePostal;
+	}
+
+	public String getProvince() {
+		return _province;
+	}
+
+	public void setProvince(String _province) {
+		this._province = _province;
+	}
+
+	public String getUpdatedBy() {
+		return _updatedBy;
+	}
+
+	protected void setUpdatedBy(String _updatedBy) {
+		this._updatedBy = _updatedBy;
+	}
+
+	public Date getLastUpdated() {
+		return _lastUpdated;
+	}
+
+	protected void setLastUpdated(Date _lastUpdated) {
+		this._lastUpdated = _lastUpdated;
+	}
+
+	// METHODS
 	public void loadProperties(Map<String, Object> data) {
 		if (data != null) {
 			setId((int) data.get("ID"));
@@ -41,10 +80,12 @@ public class AdresseDto {
 			setProvince((String) data.get("PROVINCE"));
 
 			// setLastUpdated((Date) data.get("LASTUPDATED"));
-			setLastUpdated(data.get("LASTUPDATED") == null ? null : Date.valueOf(((Timestamp) data.get("LASTUPDATED")).toLocalDateTime().toLocalDate()));
+			setLastUpdated(data.get("LASTUPDATED") == null ? null
+					: Date.valueOf(((Timestamp) data.get("LASTUPDATED")).toLocalDateTime().toLocalDate()));
 			setUpdatedBy((String) data.get("UPDATEDBY"));
 		}
 	}
+
 	public void loadProperties(AdresseDto data) {
 		if (data != null) {
 			setId((int) data.getId());

@@ -9,7 +9,7 @@ public class VehiculeDto {
 	private int _lookUpId;
 	private String _noSerie;
 	private String _immatriculation;
-	//private String _km;
+	// private String _km;
 	private String _updatedBy;
 	private Date _lastUpdated;
 
@@ -18,10 +18,9 @@ public class VehiculeDto {
 		return _id;
 	}
 
-	public void setId(int _id) {
+	protected void setId(int _id) {
 		this._id = _id;
 	}
-
 
 	public int getLookUpId() {
 		return _lookUpId;
@@ -51,7 +50,7 @@ public class VehiculeDto {
 		return _updatedBy;
 	}
 
-	public void setUpdatedBy(String _updatedBy) {
+	protected void setUpdatedBy(String _updatedBy) {
 		this._updatedBy = _updatedBy;
 	}
 
@@ -59,12 +58,11 @@ public class VehiculeDto {
 		return _lastUpdated;
 	}
 
-	public void setLastUpdated(Date _lastUpdated) {
+	protected void setLastUpdated(Date _lastUpdated) {
 		this._lastUpdated = _lastUpdated;
 	}
 
-	
-	//METHODS
+	// METHODS
 	public void loadProperties(Map<String, Object> data) {
 		if (data != null) {
 			setId((int) data.get("ID"));
@@ -73,7 +71,8 @@ public class VehiculeDto {
 			setImmatriculation((String) data.get("IMMAtRICULAtION"));
 
 			// setLastUpdated((Date) data.get("LASTUPDATED"));
-			setLastUpdated(data.get("LASTUPDATED") == null ? null : Date.valueOf(((Timestamp) data.get("LASTUPDATED")).toLocalDateTime().toLocalDate()));
+			setLastUpdated(data.get("LASTUPDATED") == null ? null
+					: Date.valueOf(((Timestamp) data.get("LASTUPDATED")).toLocalDateTime().toLocalDate()));
 			setUpdatedBy((String) data.get("UPDATEDBY"));
 		}
 	}

@@ -4,26 +4,19 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.Map;
 import java.util.Properties;
 
-import alv.data.PersonneDto;
 import alv.data.ReservationDto;
-import alv.data.msAccess.PersonneDAL;
 import alv.data.msAccess.ReservationDAL;
 
 public class Reservation extends ReservationDto {
 
 	private Personne _personne;
-	//private ReservationDto _dto = new ReservationDto();
 	Connection conn;
 	private ReservationDAL dal;
 
 	//PROPERTIES
-//	public ReservationDto getDto() {return _dto;}
-//	private void setDto(ReservationDto dto) {_dto = dto;}
-
 	public Personne getPersonne() {return _personne;}
 	private void setPersonne(Personne personne) {_personne = personne;}
 	

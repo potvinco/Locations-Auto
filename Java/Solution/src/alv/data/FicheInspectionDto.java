@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class FicheInspectionDto {
 	private int _id;
-//	private int _locationId;
+	// private int _locationId;
 	private int _vehiculeId;
 	private String _description;
 	private int _estimatedCost;
@@ -19,17 +19,9 @@ public class FicheInspectionDto {
 		return _id;
 	}
 
-	public void setId(int _id) {
+	protected void setId(int _id) {
 		this._id = _id;
 	}
-
-//	public int getLocationId() {
-//		return _locationId;
-//	}
-//
-//	public void setLocationId(int _locationId) {
-//		this._locationId = _locationId;
-//	}
 
 	public String getDescription() {
 		return _description;
@@ -67,7 +59,7 @@ public class FicheInspectionDto {
 		return _updatedBy;
 	}
 
-	public void setUpdatedBy(String _updatedBy) {
+	protected void setUpdatedBy(String _updatedBy) {
 		this._updatedBy = _updatedBy;
 	}
 
@@ -75,22 +67,23 @@ public class FicheInspectionDto {
 		return _lastUpdated;
 	}
 
-	public void setLastUpdated(Date _lastUpdated) {
+	protected void setLastUpdated(Date _lastUpdated) {
 		this._lastUpdated = _lastUpdated;
 	}
 
-	
-	//METHODS
+	// METHODS
 	public void loadProperties(Map<String, Object> data) {
 		if (data != null) {
 			setId((int) data.get("ID"));
 			setVehiculeId((int) data.get("VEHICULEID"));
 			setDescription((String) data.get("DESCRIPTION"));
 			setEstimatedCost((int) data.get("ESTIMATEDCOST"));
-			setInspectionDt(data.get("INSPECTIONDT") == null ? null : Date.valueOf(((Timestamp) data.get("INSPECTIONDT")).toLocalDateTime().toLocalDate()));
+			setInspectionDt(data.get("INSPECTIONDT") == null ? null
+					: Date.valueOf(((Timestamp) data.get("INSPECTIONDT")).toLocalDateTime().toLocalDate()));
 
 			// setLastUpdated((Date) data.get("LASTUPDATED"));
-			setLastUpdated(data.get("LASTUPDATED") == null ? null : Date.valueOf(((Timestamp) data.get("LASTUPDATED")).toLocalDateTime().toLocalDate()));
+			setLastUpdated(data.get("LASTUPDATED") == null ? null
+					: Date.valueOf(((Timestamp) data.get("LASTUPDATED")).toLocalDateTime().toLocalDate()));
 			setUpdatedBy((String) data.get("UPDATEDBY"));
 		}
 	}

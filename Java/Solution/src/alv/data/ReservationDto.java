@@ -20,7 +20,7 @@ public class ReservationDto {
 		return _id;
 	}
 
-	public void setId(int _id) {
+	protected void setId(int _id) {
 		this._id = _id;
 	}
 
@@ -68,7 +68,7 @@ public class ReservationDto {
 		return _updatedBy;
 	}
 
-	public void setUpdatedBy(String _updatedBy) {
+	protected void setUpdatedBy(String _updatedBy) {
 		this._updatedBy = _updatedBy;
 	}
 
@@ -76,7 +76,7 @@ public class ReservationDto {
 		return _lastUpdated;
 	}
 
-	public void setLastUpdated(Date _lastUpdated) {
+	protected void setLastUpdated(Date _lastUpdated) {
 		this._lastUpdated = _lastUpdated;
 	}
 
@@ -109,7 +109,7 @@ public class ReservationDto {
 	}
 
 	public void loadProperties(ReservationDto data) {
-		if(data!=null) {
+		if (data != null) {
 			this.setId((int) data.getId());
 			this.setPersonneId((int) data.getPersonneId());
 			this.setStartDt(data.getStartDt());
