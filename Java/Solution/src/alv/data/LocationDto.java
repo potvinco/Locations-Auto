@@ -9,10 +9,9 @@ public class LocationDto {
 
 	private boolean _assuranceOption;
 	private boolean _kmOption;
+	private int _personneId;
+	private int _adresseId;
 	
-	private String _nom;
-	private String _prenom;
-	private String _telephone;
 	private Date _LocationDt;
 	private String _updatedBy;
 	private Date _lastUpdated;
@@ -26,28 +25,44 @@ public class LocationDto {
 		this._id = _id;
 	}
 
-	public String getNom() {
-		return _nom;
+	public boolean getAssuranceOption() {
+		return _assuranceOption;
 	}
 
-	public void setNom(String _nom) {
-		this._nom = _nom;
+	public void setAssuranceOption(boolean _assuranceOption) {
+		this._assuranceOption = _assuranceOption;
 	}
 
-	public String getPrenom() {
-		return _prenom;
+	public boolean getKmOption() {
+		return _kmOption;
 	}
 
-	public void setPrenom(String _prenom) {
-		this._prenom = _prenom;
+	public void setKmOption(boolean _kmOption) {
+		this._kmOption = _kmOption;
 	}
 
-	public String getTelephone() {
-		return _telephone;
+	public Date getLocationDt() {
+		return _LocationDt;
 	}
 
-	public void setTelephone(String _telephone) {
-		this._telephone = _telephone;
+	public void setLocationDt(Date _LocationDt) {
+		this._LocationDt = _LocationDt;
+	}
+
+	public int getPersonneId() {
+		return _personneId;
+	}
+
+	public void setPersonneId(int _personneId) {
+		this._personneId = _personneId;
+	}
+
+	public int getAdresseId() {
+		return _adresseId;
+	}
+
+	public void setAdresseId(int _adresseId) {
+		this._adresseId = _adresseId;
 	}
 
 	public String getUpdatedBy() {
@@ -70,12 +85,10 @@ public class LocationDto {
 	public void loadProperties(Map<String, Object> data) {
 		if (data != null) {
 			setId((int) data.get("ID"));
-			setNom((String) data.get("NOM"));
-			setPrenom((String) data.get("PRENOM"));
-			setTelephone((String) data.get("TELEPHONE"));
-			//setDateNaissance(data.get("DATENAISSANCE") == null ? null : Date.valueOf(((Timestamp) data.get("DATENAISSANCE")).toLocalDateTime().toLocalDate()));
+			setKmOption((boolean) data.get("KMOPTION"));
+			setAssuranceOption((boolean) data.get("ASSURANCEOPTION"));
+			setLocationDt(data.get("LOCATIONDT") == null ? null : Date.valueOf(((Timestamp) data.get("LOCATIONDT")).toLocalDateTime().toLocalDate()));
 
-			// setLastUpdated((Date) data.get("LASTUPDATED"));
 			setLastUpdated(data.get("LASTUPDATED") == null ? null : Date.valueOf(((Timestamp) data.get("LASTUPDATED")).toLocalDateTime().toLocalDate()));
 			setUpdatedBy((String) data.get("UPDATEDBY"));
 		}
