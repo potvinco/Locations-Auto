@@ -4,42 +4,32 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.Map;
 import java.util.Properties;
 
-import alv.data.PersonneDto;
-import alv.data.ReservationDto;
-import alv.data.msAccess.PersonneDAL;
+import alv.data.VehicleCategoryDto;
+import alv.data.msAccess.VehicleCategoryDAL;
 
-public class Personne {
+public class VehicleCategory {
 
-	private PersonneDto _dto = new PersonneDto();
-	private Adresse _adresse;
+	private VehicleCategoryDto _dto = new VehicleCategoryDto();
 	Connection conn;
-	private PersonneDAL dal;
+	private VehicleCategoryDAL dal;
 
-	//PROPERTIES
-	public PersonneDto getDto() {return _dto;}
-	private void setDto(PersonneDto dto) {_dto = dto;}
+	// PROPERTIES
+	public VehicleCategoryDto getDto() {return _dto;}
+	private void setDto(VehicleCategoryDto dto) {_dto = dto;}
 
-	public Adresse getAdresse() {return _adresse;}
-	private void setAdresse(Adresse adresse) {_adresse = adresse;}
-	
 	// CONSTRUCTOR
-	private Personne() {
+	private VehicleCategory() {
 		initConnection();
-		dal = new PersonneDAL(conn);
-		
-		_adresse = Adresse.create();
+		dal = new VehicleCategoryDAL(conn);
 	}
 
-	private Personne(int id) {
+	private VehicleCategory(int id) {
 		initConnection();
-		dal = new PersonneDAL(conn);
+		dal = new VehicleCategoryDAL(conn);
 		_dto = dal.fetch(id);
-		
-		setAdresse(Adresse.load(_dto.getAdresseId()));
 	}
 
 	// METHODS
@@ -57,7 +47,7 @@ public class Personne {
 				String msAccDB = props.getProperty("db.path");
 				String dbURL = props.getProperty("db.conn.url") + msAccDB;
 
-				conn = PersonneDAL.createConnection(driver, dbURL, null, null);
+				conn = VehicleCategoryDAL.createConnection(driver, dbURL, null, null);
 			}
 		} catch (ClassNotFoundException | SQLException | IOException e) {
 			// TODO Auto-generated catch block
@@ -66,37 +56,30 @@ public class Personne {
 	}
 
 	//this method will be used when the object is a child of Personnes
-	public static Personne load(Map<String, Object> data) {
-		Personne res = new Personne();
+	public static VehicleCategory load(Map<String, Object> data) {
+		VehicleCategory res = new VehicleCategory();
 		res.getDto().loadProperties(data);
 		
 		return res;
 	}
 		
-	protected static Personne load(PersonneDto dto) {
-		Personne res = new Personne();
+	protected static VehicleCategory load(VehicleCategoryDto dto) {
+		VehicleCategory res = new VehicleCategory();
 		res.setDto(dto);
 
-		if(res.getDto().getAdresseId()>0)
-			res.setAdresse(Adresse.load(res.getDto().getAdresseId()));
-		
 		return res;
 	}
 
-	public static Personne load(int id) {
-		return new Personne(id);
+	public static VehicleCategory load(int id) {
+		return new VehicleCategory(id);
 	}
 
-	public static Personne create() {
-		return new Personne();
+	public static VehicleCategory create() {
+		return new VehicleCategory();
 	}
 
 	public void save() {
 
-		if(getAdresse()!=null) {
-			getAdresse().save();
-			_dto.setAdresseId(getAdresse().getDto().getId());
-		}
 		if(_dto.getId()==0) {
 			int id = dal.insert(_dto);
 			_dto.setId(id);
@@ -112,7 +95,6 @@ public class Personne {
 
 			if (dal.delete(id)) {
 				_dto.setId(0);
-				getAdresse().delete();
 			}
 		}
 	}
