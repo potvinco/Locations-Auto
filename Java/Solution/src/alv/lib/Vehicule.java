@@ -10,34 +10,24 @@ import java.util.Properties;
 import alv.data.VehiculeDto;
 import alv.data.msAccess.VehiculeDAL;
 
-public class Vehicule {
+public class Vehicule extends VehiculeDto {
 
-	private VehiculeDto _dto = new VehiculeDto();
-//	private Adresse _adresse;
 	Connection conn;
 	private VehiculeDAL dal;
 
 	//PROPERTIES
-	public VehiculeDto getDto() {return _dto;}
-	private void setDto(VehiculeDto dto) {_dto = dto;}
-
-//	public Adresse getAdresse() {return _adresse;}
-//	private void setAdresse(Adresse adresse) {_adresse = adresse;}
 	
 	// CONSTRUCTOR
 	private Vehicule() {
 		initConnection();
 		dal = new VehiculeDAL(conn);
-		
-//		_adresse = Adresse.create();
+
 	}
 
 	private Vehicule(int id) {
 		initConnection();
 		dal = new VehiculeDAL(conn);
-		_dto = dal.fetch(id);
-		
-//		setAdresse(Adresse.load(_dto.getAdresseId()));
+		loadProperties(dal.fetch(id));
 	}
 
 	// METHODS
@@ -66,14 +56,14 @@ public class Vehicule {
 	//this method will be used when the object is a child of Vehicules
 	public static Vehicule load(Map<String, Object> data) {
 		Vehicule res = new Vehicule();
-		res.getDto().loadProperties(data);
+		res.loadProperties(data);
 		
 		return res;
 	}
 		
 	protected static Vehicule load(VehiculeDto dto) {
 		Vehicule res = new Vehicule();
-		res.setDto(dto);
+		res.loadProperties(dto);
 
 		return res;
 	}
@@ -88,26 +78,21 @@ public class Vehicule {
 
 	public void save() {
 
-//		if(getAdresse()!=null) {
-//			getAdresse().save();
-//			_dto.setAdresseId(getAdresse().getDto().getId());
-//		}
-		if(_dto.getId()==0) {
-			int id = dal.insert(_dto);
-			_dto.setId(id);
+		if(getId()==0) {
+			int id = dal.insert(this);
+			setId(id);
 		}
 		else
-			dal.update(_dto);
+			dal.update(this);
 	}
 
 	public void delete() {
-		int id = _dto.getId();
+		int id = getId();
 
 		if (id != 0) {
 
 			if (dal.delete(id)) {
-				_dto.setId(0);
-//				getAdresse().delete();
+				setId(0);
 			}
 		}
 	}

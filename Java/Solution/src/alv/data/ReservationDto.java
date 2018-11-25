@@ -107,4 +107,18 @@ public class ReservationDto {
 
 		}
 	}
+
+	public void loadProperties(ReservationDto data) {
+		if(data!=null) {
+			this.setId((int) data.getId());
+			this.setPersonneId((int) data.getPersonneId());
+			this.setStartDt(data.getStartDt());
+			this.setEndDt(data.getEndDt());
+			this.setCategoryId((int) data.getCategoryId());
+			this.setAssuranceOption((boolean) data.getAssuranceOption());
+			this.setKmOption((boolean) data.getKmOption());
+			this.setLastUpdated(data.getLastUpdated());
+			this.setUpdatedBy((String) data.getUpdatedBy());
+		}
+	}
 }

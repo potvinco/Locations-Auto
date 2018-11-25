@@ -6,7 +6,8 @@ import java.util.Map;
 
 public class FicheInspectionDto {
 	private int _id;
-	private int _locationId;
+//	private int _locationId;
+	private int _vehiculeId;
 	private String _description;
 	private int _estimatedCost;
 	private Date _inspectionDt;
@@ -22,13 +23,13 @@ public class FicheInspectionDto {
 		this._id = _id;
 	}
 
-	public int getLocationId() {
-		return _locationId;
-	}
-
-	public void setLocationId(int _locationId) {
-		this._locationId = _locationId;
-	}
+//	public int getLocationId() {
+//		return _locationId;
+//	}
+//
+//	public void setLocationId(int _locationId) {
+//		this._locationId = _locationId;
+//	}
 
 	public String getDescription() {
 		return _description;
@@ -46,12 +47,20 @@ public class FicheInspectionDto {
 		this._estimatedCost = _estimatedCost;
 	}
 
-	public Date getInspectationDt() {
+	public Date getInspectionDt() {
 		return _inspectionDt;
 	}
 
 	public void setInspectionDt(Date _inspectionDt) {
 		this._inspectionDt = _inspectionDt;
+	}
+
+	public int getVehiculeId() {
+		return _vehiculeId;
+	}
+
+	public void setVehiculeId(int _vehiculeId) {
+		this._vehiculeId = _vehiculeId;
 	}
 
 	public String getUpdatedBy() {
@@ -75,7 +84,7 @@ public class FicheInspectionDto {
 	public void loadProperties(Map<String, Object> data) {
 		if (data != null) {
 			setId((int) data.get("ID"));
-			setLocationId((int) data.get("LOCATIONID"));
+			setVehiculeId((int) data.get("VEHICULEID"));
 			setDescription((String) data.get("DESCRIPTION"));
 			setEstimatedCost((int) data.get("ESTIMATEDCOST"));
 			setInspectionDt(data.get("INSPECTIONDT") == null ? null : Date.valueOf(((Timestamp) data.get("INSPECTIONDT")).toLocalDateTime().toLocalDate()));
@@ -83,6 +92,19 @@ public class FicheInspectionDto {
 			// setLastUpdated((Date) data.get("LASTUPDATED"));
 			setLastUpdated(data.get("LASTUPDATED") == null ? null : Date.valueOf(((Timestamp) data.get("LASTUPDATED")).toLocalDateTime().toLocalDate()));
 			setUpdatedBy((String) data.get("UPDATEDBY"));
+		}
+	}
+
+	public void loadProperties(FicheInspectionDto data) {
+		if (data != null) {
+			setId((int) data.getId());
+			setVehiculeId((int) data.getVehiculeId());
+			setDescription((String) data.getDescription());
+			setEstimatedCost((int) data.getEstimatedCost());
+			setInspectionDt(data.getInspectionDt());
+
+			setLastUpdated(data.getLastUpdated());
+			setUpdatedBy((String) data.getUpdatedBy());
 		}
 	}
 }

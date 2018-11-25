@@ -55,6 +55,15 @@ public class PersonneDto {
 		this._dateNaissance = _dateNaissance;
 	}
 
+
+	public int getAdresseId() {
+		return _adresseId;
+	}
+
+	public void setAdresseId(int _adresseId) {
+		this._adresseId = _adresseId;
+	}
+	
 	public String getUpdatedBy() {
 		return _updatedBy;
 	}
@@ -87,11 +96,17 @@ public class PersonneDto {
 		}
 	}
 
-	public int getAdresseId() {
-		return _adresseId;
-	}
 
-	public void setAdresseId(int _adresseId) {
-		this._adresseId = _adresseId;
+	public void loadProperties(PersonneDto data) {
+		if (data != null) {
+			setId((int) data.getId());
+			setNom((String) data.getNom());
+			setPrenom((String) data.getPrenom());
+			setTelephone((String) data.getTelephone());
+			setDateNaissance(data.getDateNaissance());
+
+			setLastUpdated(data.getLastUpdated());
+			setUpdatedBy((String) data.getUpdatedBy());
+		}
 	}
 }

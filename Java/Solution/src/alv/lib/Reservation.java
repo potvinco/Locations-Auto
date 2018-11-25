@@ -13,16 +13,16 @@ import alv.data.ReservationDto;
 import alv.data.msAccess.PersonneDAL;
 import alv.data.msAccess.ReservationDAL;
 
-public class Reservation {
+public class Reservation extends ReservationDto {
 
 	private Personne _personne;
-	private ReservationDto _dto = new ReservationDto();
+	//private ReservationDto _dto = new ReservationDto();
 	Connection conn;
 	private ReservationDAL dal;
 
 	//PROPERTIES
-	public ReservationDto getDto() {return _dto;}
-	private void setDto(ReservationDto dto) {_dto = dto;}
+//	public ReservationDto getDto() {return _dto;}
+//	private void setDto(ReservationDto dto) {_dto = dto;}
 
 	public Personne getPersonne() {return _personne;}
 	private void setPersonne(Personne personne) {_personne = personne;}
@@ -38,9 +38,9 @@ public class Reservation {
 	private Reservation(int id) {
 		initConnection();
 		dal = new ReservationDAL(conn);
-		_dto = dal.fetch(id);
+		loadProperties(dal.fetch(id));
 
-		setPersonne(Personne.load(_dto.getPersonneId()));
+		setPersonne(Personne.load(getPersonneId()));
 	}
 
 	// METHODS
@@ -69,17 +69,17 @@ public class Reservation {
 	//this method will be used when the object is a child of Reservations
 	public static Reservation load(Map<String, Object> data) {
 		Reservation res = new Reservation();
-		res.getDto().loadProperties(data);
+		res.loadProperties(data);
 		
-		if(res.getDto().getPersonneId()>0)
-			res.setPersonne(Personne.load(res.getDto().getPersonneId()));
+		if(res.getPersonneId()>0)
+			res.setPersonne(Personne.load(res.getPersonneId()));
 		
 		return res;
 	}
 	
 	public static Reservation load(ReservationDto data) {
 		Reservation res = new Reservation();
-		res.setDto(data);
+		res.loadProperties(data);
 		return res;
 	}
 
@@ -95,22 +95,22 @@ public class Reservation {
 
 		if(getPersonne()!=null) {
 			getPersonne().save();
-			_dto.setPersonneId(getPersonne().getDto().getId());
+			setPersonneId(getPersonne().getId());
 		}
-		if(_dto.getId()==0) {
-			int id = dal.insert(_dto);
-			_dto.setId(id);
+		if(getId()==0) {
+			int id = dal.insert(this);
+			setId(id);
 		}
 		else
-			dal.update(_dto);
+			dal.update(this);
 	}
 
 	public void delete() {
-		int id = _dto.getId();
+		int id = getId();
 
 		if (id != 0) {
 			if (dal.delete(id)) {
-				_dto.setId(0);
+				setId(0);
 				getPersonne().delete();
 			}
 		}

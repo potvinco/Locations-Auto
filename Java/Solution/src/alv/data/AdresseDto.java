@@ -45,4 +45,17 @@ public class AdresseDto {
 			setUpdatedBy((String) data.get("UPDATEDBY"));
 		}
 	}
+	public void loadProperties(AdresseDto data) {
+		if (data != null) {
+			setId((int) data.getId());
+			setAdresse((String) data.getAdresse());
+			setVille((String) data.getVille());
+			setCodePostal((String) data.getCodePostal());
+			setProvince((String) data.getProvince());
+
+			// setLastUpdated((Date) data.get("LASTUPDATED"));
+			setLastUpdated(data.getLastUpdated());
+			setUpdatedBy((String) data.getUpdatedBy());
+		}
+	}
 }

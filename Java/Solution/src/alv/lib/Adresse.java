@@ -13,18 +13,18 @@ import alv.data.PersonneDto;
 import alv.data.msAccess.AdresseDAL;
 import alv.data.msAccess.PersonneDAL;
 
-public class Adresse {
+public class Adresse extends AdresseDto{
 
-	private AdresseDto _dto = new AdresseDto();
+	//private AdresseDto _dto = new AdresseDto();
 	Connection conn;
 	private AdresseDAL dal;
 
 	//PROPERTIES
-	public AdresseDto getDto() {
-		return _dto;
-	}
-	private void setDto(AdresseDto dto) { _dto = dto; }
-	
+//	public AdresseDto getDto() {
+//		return _dto;
+//	}
+//	private void setDto(AdresseDto dto) { _dto = dto; }
+//	
 	// CONSTRUCTOR
 	private Adresse() {
 		initConnection();
@@ -35,7 +35,7 @@ public class Adresse {
 
 		initConnection();
 		dal = new AdresseDAL(conn);
-		_dto = dal.fetch(id);	
+		loadProperties(dal.fetch(id));	
 	}
 
 	// METHODS	
@@ -63,7 +63,7 @@ public class Adresse {
 	
 	public static Adresse load(AdresseDto dto) {
 		Adresse res = new Adresse();
-		res.setDto(dto);
+		res.loadProperties(dto);
 		return res;
 	}
 	
@@ -77,20 +77,20 @@ public class Adresse {
 	}
 	
 	public void save() {
-		if(_dto.getId()==0) {
-			int id = dal.insert(_dto);
-			_dto.setId(id);
+		if(getId()==0) {
+			int id = dal.insert(this);
+			setId(id);
 		}
 		else
-			dal.update(_dto);
+			dal.update(this);
 	}
 	
 	public void delete() {
-		int id = _dto.getId();
+		int id = getId();
 
 		if (id != 0) {
 			if (dal.delete(id)) {
-				_dto.setId(0);
+				setId(0);
 			}
 		}
 	}

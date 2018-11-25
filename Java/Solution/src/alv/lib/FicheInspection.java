@@ -7,26 +7,33 @@ import java.sql.SQLException;
 import java.util.Map;
 import java.util.Properties;
 
-import alv.data.VehicleCategoryDto;
-import alv.data.msAccess.VehicleCategoryDAL;
+import alv.data.FicheInspectionDto;
+import alv.data.msAccess.FicheInspectionDAL;
 
-public class VehicleCategory extends VehicleCategoryDto {
+public class FicheInspection extends FicheInspectionDto {
 
-	//private VehicleCategoryDto _dto = new VehicleCategoryDto();
+	//private FicheInspectionDto _dto = new FicheInspectionDto();
 	Connection conn;
-	private VehicleCategoryDAL dal;
+	private FicheInspectionDAL dal;
 
-	// PROPERTIES
-
+	//PROPERTIES
+//	public FicheInspectionDto getDto() {return _dto;}
+//	private void setDto(FicheInspectionDto dto) {_dto = dto;}
+	
+	@Override
+	public void setVehiculeId(int id) {
+		//if id is different, the inspection should become invalid --> new?
+	}
+	
 	// CONSTRUCTOR
-	private VehicleCategory() {
+	private FicheInspection() {
 		initConnection();
-		dal = new VehicleCategoryDAL(conn);
+		dal = new FicheInspectionDAL(conn);
 	}
 
-	private VehicleCategory(int id) {
+	private FicheInspection(int id) {
 		initConnection();
-		dal = new VehicleCategoryDAL(conn);
+		dal = new FicheInspectionDAL(conn);
 		loadProperties(dal.fetch(id));
 	}
 
@@ -45,7 +52,7 @@ public class VehicleCategory extends VehicleCategoryDto {
 				String msAccDB = props.getProperty("db.path");
 				String dbURL = props.getProperty("db.conn.url") + msAccDB;
 
-				conn = VehicleCategoryDAL.createConnection(driver, dbURL, null, null);
+				conn = FicheInspectionDAL.createConnection(driver, dbURL, null, null);
 			}
 		} catch (ClassNotFoundException | SQLException | IOException e) {
 			// TODO Auto-generated catch block
@@ -53,31 +60,31 @@ public class VehicleCategory extends VehicleCategoryDto {
 		}
 	}
 
-	//this method will be used when the object is a child of Personnes
-	public static VehicleCategory load(Map<String, Object> data) {
-		VehicleCategory res = new VehicleCategory();
+	//this method will be used when the object is a child of FicheInspections
+	public static FicheInspection load(Map<String, Object> data) {
+		FicheInspection res = new FicheInspection();
 		res.loadProperties(data);
 		
 		return res;
 	}
 		
-	protected static VehicleCategory load(VehicleCategoryDto dto) {
-		VehicleCategory res = new VehicleCategory();
+	protected static FicheInspection load(FicheInspectionDto dto) {
+		FicheInspection res = new FicheInspection();
 		res.loadProperties(dto);
 
 		return res;
 	}
 
-	public static VehicleCategory load(int id) {
-		return new VehicleCategory(id);
+	public static FicheInspection load(int id) {
+		return new FicheInspection(id);
 	}
 
-	public static VehicleCategory create() {
-		return new VehicleCategory();
+	public static FicheInspection create() {
+		return new FicheInspection();
 	}
 
 	public void save() {
-
+		
 		if(getId()==0) {
 			int id = dal.insert(this);
 			setId(id);

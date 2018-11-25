@@ -77,4 +77,16 @@ public class VehiculeDto {
 			setUpdatedBy((String) data.get("UPDATEDBY"));
 		}
 	}
+
+	public void loadProperties(VehiculeDto data) {
+		if (data != null) {
+			setId((int) data.getId());
+			setLookUpId((int) data.getLookUpId());
+			setNoSerie((String) data.getNoSerie());
+			setImmatriculation((String) data.getImmatriculation());
+
+			setLastUpdated(data.getLastUpdated());
+			setUpdatedBy((String) data.getUpdatedBy());
+		}
+	}
 }
