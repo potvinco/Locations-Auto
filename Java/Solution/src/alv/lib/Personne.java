@@ -4,25 +4,18 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.Map;
 import java.util.Properties;
 
 import alv.data.PersonneDto;
-import alv.data.ReservationDto;
 import alv.data.msAccess.PersonneDAL;
 
-public class Personne {
-
-	private PersonneDto _dto = new PersonneDto();
+public class Personne extends PersonneDto {
 	private Adresse _adresse;
 	Connection conn;
 	private PersonneDAL dal;
 
 	//PROPERTIES
-	public PersonneDto getDto() {return _dto;}
-	private void setDto(PersonneDto dto) {_dto = dto;}
-
 	public Adresse getAdresse() {return _adresse;}
 	private void setAdresse(Adresse adresse) {_adresse = adresse;}
 	
@@ -37,9 +30,9 @@ public class Personne {
 	private Personne(int id) {
 		initConnection();
 		dal = new PersonneDAL(conn);
-		_dto = dal.fetch(id);
+		loadProperties(dal.fetch(id));
 		
-		setAdresse(Adresse.load(_dto.getAdresseId()));
+		setAdresse(Adresse.load(getAdresseId()));
 	}
 
 	// METHODS
@@ -68,17 +61,17 @@ public class Personne {
 	//this method will be used when the object is a child of Personnes
 	public static Personne load(Map<String, Object> data) {
 		Personne res = new Personne();
-		res.getDto().loadProperties(data);
+		res.loadProperties(data);
 		
 		return res;
 	}
 		
 	protected static Personne load(PersonneDto dto) {
 		Personne res = new Personne();
-		res.setDto(dto);
+		res.loadProperties(dto);
 
-		if(res.getDto().getAdresseId()>0)
-			res.setAdresse(Adresse.load(res.getDto().getAdresseId()));
+		if(res.getAdresseId()>0)
+			res.setAdresse(Adresse.load(res.getAdresseId()));
 		
 		return res;
 	}
@@ -95,23 +88,23 @@ public class Personne {
 
 		if(getAdresse()!=null) {
 			getAdresse().save();
-			_dto.setAdresseId(getAdresse().getDto().getId());
+			setAdresseId(getAdresse().getId());
 		}
-		if(_dto.getId()==0) {
-			int id = dal.insert(_dto);
-			_dto.setId(id);
+		if(getId()==0) {
+			int id = dal.insert(this);
+			setId(id);
 		}
 		else
-			dal.update(_dto);
+			dal.update(this);
 	}
 
 	public void delete() {
-		int id = _dto.getId();
+		int id = getId();
 
 		if (id != 0) {
 
 			if (dal.delete(id)) {
-				_dto.setId(0);
+				setId(0);
 				getAdresse().delete();
 			}
 		}

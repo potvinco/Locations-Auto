@@ -58,4 +58,16 @@ public class VehicleCategoryDto {
 
 		}
 	}
+	
+
+	public void loadProperties(VehicleCategoryDto data) {
+		if(data!=null) {
+			this.setId((int) data.getId());
+			this.setDescription((String) data.getDescription());
+
+
+			this.setLastUpdated(data.getLastUpdated());
+			this.setUpdatedBy((String) data.getUpdatedBy());
+		} 
+	}
 }

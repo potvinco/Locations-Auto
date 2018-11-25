@@ -15,7 +15,7 @@ public class Main {
 		
 		Reservations col = Reservations.load();
 		col.getItems().forEach(item -> {
-			System.out.println(item.getDto().getEndDt());
+			System.out.println(item.getEndDt());
 			;
 		});
 	}
@@ -25,8 +25,8 @@ public class Main {
 		System.out.println("Test_Reservation");
 		
 		Reservation res = Reservation.load(1);
-		System.out.println(res.getDto().getId());
-		System.out.println(res.getDto().getCategoryId());		
+		System.out.println(res.getId());
+		System.out.println(res.getCategoryId());		
 	}
 
 	private static void Test_Personne() {
@@ -35,29 +35,29 @@ public class Main {
 		
 		//NEW
 		Personne per = Personne.create();
-		per.getDto().setNom("name");
-		per.getAdresse().getDto().setAdresse("new address value");
+		per.setNom("name");
+		per.getAdresse().setAdresse("new address value");
 		per.save();
-		System.out.println(per.getDto().getId());
-		System.out.println(per.getDto().getNom());
-		System.out.println(per.getAdresse().getDto().getId());
-		System.out.println(per.getAdresse().getDto().getAdresse());
+		System.out.println(per.getId());
+		System.out.println(per.getNom());
+		System.out.println(per.getAdresse().getId());
+		System.out.println(per.getAdresse().getAdresse());
 		
 		
-//		int personeId = per.getDto().getId();
+//		int personeId = per.getId();
 //
 //		per = Personne.load(personeId);
-//		System.out.println(per.getDto().getNom());
-//		per.getDto().setNom("updated nom 2");
+//		System.out.println(per.getNom());
+//		per.setNom("updated nom 2");
 //		per.save();
 //		per = null;
 //		
 //		per = Personne.load(personeId);
-//		System.out.println(per.getDto().getNom());
+//		System.out.println(per.getNom());
 //		per = null;
-		
+//		
 //		per = Personne.load(personeId);
 //		per.delete();
-//		System.out.println(per.getDto().getId());
+//		System.out.println(per.getId());
 	}
 }

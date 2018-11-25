@@ -11,6 +11,7 @@ public class LocationDto {
 	private boolean _kmOption;
 	private int _personneId;
 	private int _adresseId;
+	private int _ficheInspectionId;
 	
 	private Date _LocationDt;
 	private String _updatedBy;
@@ -65,6 +66,14 @@ public class LocationDto {
 		this._adresseId = _adresseId;
 	}
 
+	public int getFicheInspectionId() {
+		return _ficheInspectionId;
+	}
+
+	public void setFicheInspectionId(int _ficheInspectionId) {
+		this._ficheInspectionId = _ficheInspectionId;
+	}
+
 	public String getUpdatedBy() {
 		return _updatedBy;
 	}
@@ -87,10 +96,24 @@ public class LocationDto {
 			setId((int) data.get("ID"));
 			setKmOption((boolean) data.get("KMOPTION"));
 			setAssuranceOption((boolean) data.get("ASSURANCEOPTION"));
+			setFicheInspectionId((int) data.get("FICHEINSPECTIONID"));
 			setLocationDt(data.get("LOCATIONDT") == null ? null : Date.valueOf(((Timestamp) data.get("LOCATIONDT")).toLocalDateTime().toLocalDate()));
 
 			setLastUpdated(data.get("LASTUPDATED") == null ? null : Date.valueOf(((Timestamp) data.get("LASTUPDATED")).toLocalDateTime().toLocalDate()));
 			setUpdatedBy((String) data.get("UPDATEDBY"));
+		}
+	}
+
+	public void loadProperties(LocationDto data) {
+		if (data != null) {
+			setId((int) data.getId());
+			setKmOption((boolean) data.getKmOption());
+			setAssuranceOption((boolean) data.getAssuranceOption());
+			setFicheInspectionId((int) data.getFicheInspectionId());
+			setLocationDt(data.getLocationDt());
+
+			setLastUpdated(data.getLastUpdated());
+			setUpdatedBy((String) data.getUpdatedBy());
 		}
 	}
 }
