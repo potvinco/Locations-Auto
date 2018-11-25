@@ -7,16 +7,15 @@ import java.sql.SQLException;
 import java.util.Map;
 import java.util.Properties;
 
-import alv.data.LocationDto;
-import alv.data.msAccess.LocationDAL;
+import alv.data.RetourLocationDto;
+import alv.data.msAccess.RetourLocationDAL;
 
-public class Location extends LocationDto {
+public class RetourLocation extends RetourLocationDto {
 
 	private Personne _personne;
-	private Adresse _adresse;
 	private FicheInspection _ficheInspection;
 	Connection conn;
-	private LocationDAL dal;
+	private RetourLocationDAL dal;
 
 	// PROPERTIES
 	public Personne getPersonne() {
@@ -25,14 +24,6 @@ public class Location extends LocationDto {
 
 	private void setPersonne(Personne personne) {
 		_personne = personne;
-	}
-
-	public Adresse getAdresse() {
-		return _adresse;
-	}
-
-	private void setAdresse(Adresse _adresse) {
-		this._adresse = _adresse;
 	}
 
 	public FicheInspection getFicheInspection() {
@@ -44,22 +35,21 @@ public class Location extends LocationDto {
 	}
 
 	// CONSTRUCTOR
-	private Location() {
+	private RetourLocation() {
 		initConnection();
-		dal = new LocationDAL(conn);
+		dal = new RetourLocationDAL(conn);
 
 		_personne = Personne.create();
-		_adresse = Adresse.create();
 		_ficheInspection = FicheInspection.create();
 	}
 
-	private Location(int id) {
+	private RetourLocation(int id) {
 		initConnection();
-		dal = new LocationDAL(conn);
+		dal = new RetourLocationDAL(conn);
 		loadProperties(dal.fetch(id));
 
 		setPersonne(Personne.load(getPersonneId()));
-		setAdresse(Adresse.load(getAdresseId()));
+		//setAdresse(Adresse.load(getAdresseId()));
 		setFicheInspection(FicheInspection.load(getFicheInspectionId()));
 	}
 
@@ -78,7 +68,7 @@ public class Location extends LocationDto {
 				String msAccDB = props.getProperty("db.path");
 				String dbURL = props.getProperty("db.conn.url") + msAccDB;
 
-				conn = LocationDAL.createConnection(driver, dbURL, null, null);
+				conn = RetourLocationDAL.createConnection(driver, dbURL, null, null);
 			}
 		} catch (ClassNotFoundException | SQLException | IOException e) {
 			// TODO Auto-generated catch block
@@ -87,15 +77,12 @@ public class Location extends LocationDto {
 	}
 
 	// this method will be used when the object is a child of Locations
-	public static Location load(Map<String, Object> data) {
-		Location res = new Location();
+	public static RetourLocation load(Map<String, Object> data) {
+		RetourLocation res = new RetourLocation();
 		res.loadProperties(data);
 
 		if (res.getPersonneId() > 0)
 			res.setPersonne(Personne.load(res.getPersonneId()));
-
-		if (res.getAdresseId() > 0)
-			res.setAdresse(Adresse.load(res.getAdresseId()));
 
 		if (res.getFicheInspectionId() > 0)
 			res.setFicheInspection(FicheInspection.load(res.getFicheInspectionId()));
@@ -103,15 +90,12 @@ public class Location extends LocationDto {
 		return res;
 	}
 
-	public static Location load(LocationDto data) {
-		Location res = new Location();
+	public static RetourLocation load(RetourLocationDto data) {
+		RetourLocation res = new RetourLocation();
 		res.loadProperties(data);
 
 		if (res.getPersonneId() > 0)
 			res.setPersonne(Personne.load(res.getPersonneId()));
-
-		if (res.getAdresseId() > 0)
-			res.setAdresse(Adresse.load(res.getAdresseId()));
 
 		if (res.getFicheInspectionId() > 0)
 			res.setFicheInspection(FicheInspection.load(res.getFicheInspectionId()));
@@ -119,12 +103,12 @@ public class Location extends LocationDto {
 		return res;
 	}
 
-	public static Location load(int id) {
-		return new Location(id);
+	public static RetourLocation load(int id) {
+		return new RetourLocation(id);
 	}
 
-	public static Location create() {
-		return new Location();
+	public static RetourLocation create() {
+		return new RetourLocation();
 	}
 
 	public void save() {
@@ -133,11 +117,7 @@ public class Location extends LocationDto {
 			getPersonne().save();
 			setPersonneId(getPersonne().getId());
 		}
-		if (getAdresse() != null) {
-			getAdresse().save();
-			setAdresseId(getAdresse().getId());
-		}
-
+		
 		if (getFicheInspection() != null) {
 			getFicheInspection().save();
 			setFicheInspectionId(getFicheInspection().getId());
@@ -157,7 +137,6 @@ public class Location extends LocationDto {
 			if (dal.delete(id)) {
 				setId(0);
 				getPersonne().delete();
-				getAdresse().delete();
 				getFicheInspection().delete();
 			}
 		}

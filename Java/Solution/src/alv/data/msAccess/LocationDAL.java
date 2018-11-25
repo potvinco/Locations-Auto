@@ -2,7 +2,6 @@ package alv.data.msAccess;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -12,7 +11,6 @@ import java.util.Map;
 
 import alv.data.ConnectionAdapter;
 import alv.data.ILocationDAL;
-import alv.data.PersonneDto;
 import alv.data.LocationDto;
 
 public class LocationDAL extends ConnectionAdapter implements ILocationDAL {

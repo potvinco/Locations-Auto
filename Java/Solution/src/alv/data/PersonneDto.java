@@ -19,7 +19,7 @@ public class PersonneDto {
 		return _id;
 	}
 
-	public void setId(int _id) {
+	protected void setId(int _id) {
 		this._id = _id;
 	}
 
@@ -55,7 +55,6 @@ public class PersonneDto {
 		this._dateNaissance = _dateNaissance;
 	}
 
-
 	public int getAdresseId() {
 		return _adresseId;
 	}
@@ -63,12 +62,12 @@ public class PersonneDto {
 	public void setAdresseId(int _adresseId) {
 		this._adresseId = _adresseId;
 	}
-	
+
 	public String getUpdatedBy() {
 		return _updatedBy;
 	}
 
-	public void setUpdatedBy(String _updatedBy) {
+	protected void setUpdatedBy(String _updatedBy) {
 		this._updatedBy = _updatedBy;
 	}
 
@@ -76,26 +75,26 @@ public class PersonneDto {
 		return _lastUpdated;
 	}
 
-	public void setLastUpdated(Date _lastUpdated) {
+	protected void setLastUpdated(Date _lastUpdated) {
 		this._lastUpdated = _lastUpdated;
 	}
 
-	
-	//METHODS
+	// METHODS
 	public void loadProperties(Map<String, Object> data) {
 		if (data != null) {
 			setId((int) data.get("ID"));
 			setNom((String) data.get("NOM"));
 			setPrenom((String) data.get("PRENOM"));
 			setTelephone((String) data.get("TELEPHONE"));
-			setDateNaissance(data.get("DATENAISSANCE") == null ? null : Date.valueOf(((Timestamp) data.get("DATENAISSANCE")).toLocalDateTime().toLocalDate()));
+			setDateNaissance(data.get("DATENAISSANCE") == null ? null
+					: Date.valueOf(((Timestamp) data.get("DATENAISSANCE")).toLocalDateTime().toLocalDate()));
 
 			// setLastUpdated((Date) data.get("LASTUPDATED"));
-			setLastUpdated(data.get("LASTUPDATED") == null ? null : Date.valueOf(((Timestamp) data.get("LASTUPDATED")).toLocalDateTime().toLocalDate()));
+			setLastUpdated(data.get("LASTUPDATED") == null ? null
+					: Date.valueOf(((Timestamp) data.get("LASTUPDATED")).toLocalDateTime().toLocalDate()));
 			setUpdatedBy((String) data.get("UPDATEDBY"));
 		}
 	}
-
 
 	public void loadProperties(PersonneDto data) {
 		if (data != null) {

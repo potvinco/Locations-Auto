@@ -4,17 +4,15 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Map;
 
-public class LocationDto {
+public class RetourLocationDto {
 	private int _id;
 
-	private boolean _assuranceOption;
-	private boolean _kmOption;
+	
 	private int _personneId;
-	private int _adresseId;
+	private int _locationId;
 	private int _ficheInspectionId;
-	private int _reservationId;
 
-	private Date _LocationDt;
+	private Date _retourDt;
 	private String _updatedBy;
 	private Date _lastUpdated;
 
@@ -27,28 +25,13 @@ public class LocationDto {
 		this._id = _id;
 	}
 
-	public boolean getAssuranceOption() {
-		return _assuranceOption;
+
+	public Date getRetourDt() {
+		return _retourDt;
 	}
 
-	public void setAssuranceOption(boolean _assuranceOption) {
-		this._assuranceOption = _assuranceOption;
-	}
-
-	public boolean getKmOption() {
-		return _kmOption;
-	}
-
-	public void setKmOption(boolean _kmOption) {
-		this._kmOption = _kmOption;
-	}
-
-	public Date getLocationDt() {
-		return _LocationDt;
-	}
-
-	public void setLocationDt(Date _LocationDt) {
-		this._LocationDt = _LocationDt;
+	public void setRetourDt(Date date) {
+		this._retourDt = date;
 	}
 
 	public int getPersonneId() {
@@ -59,14 +42,6 @@ public class LocationDto {
 		this._personneId = _personneId;
 	}
 
-	public int getAdresseId() {
-		return _adresseId;
-	}
-
-	public void setAdresseId(int _adresseId) {
-		this._adresseId = _adresseId;
-	}
-
 	public int getFicheInspectionId() {
 		return _ficheInspectionId;
 	}
@@ -75,14 +50,14 @@ public class LocationDto {
 		this._ficheInspectionId = _ficheInspectionId;
 	}
 
-	public int getReservationId() {
-		return _reservationId;
+	public int getLocationId() {
+		return _locationId;
 	}
 
-	public void setReservationId(int _reservationId) {
-		this._reservationId = _reservationId;
+	public void setLocationId(int _locationId) {
+		this._locationId = _locationId;
 	}
-
+	
 	public String getUpdatedBy() {
 		return _updatedBy;
 	}
@@ -103,12 +78,10 @@ public class LocationDto {
 	public void loadProperties(Map<String, Object> data) {
 		if (data != null) {
 			setId((int) data.get("ID"));
-			setKmOption((boolean) data.get("KMOPTION"));
-			setAssuranceOption((boolean) data.get("ASSURANCEOPTION"));
 			setFicheInspectionId((int) data.get("FICHEINSPECTIONID"));
-			setReservationId((int) data.get("RESERVATIONID"));
-			setLocationDt(data.get("LOCATIONDT") == null ? null
-					: Date.valueOf(((Timestamp) data.get("LOCATIONDT")).toLocalDateTime().toLocalDate()));
+			setLocationId((int) data.get("LOCATIONID"));
+			setRetourDt(data.get("RETOURDT") == null ? null
+					: Date.valueOf(((Timestamp) data.get("RETOURDT")).toLocalDateTime().toLocalDate()));
 
 			setLastUpdated(data.get("LASTUPDATED") == null ? null
 					: Date.valueOf(((Timestamp) data.get("LASTUPDATED")).toLocalDateTime().toLocalDate()));
@@ -116,17 +89,16 @@ public class LocationDto {
 		}
 	}
 
-	public void loadProperties(LocationDto data) {
+	public void loadProperties(RetourLocationDto data) {
 		if (data != null) {
 			setId((int) data.getId());
-			setKmOption((boolean) data.getKmOption());
-			setAssuranceOption((boolean) data.getAssuranceOption());
 			setFicheInspectionId((int) data.getFicheInspectionId());
-			setReservationId((int) data.getReservationId());
-			setLocationDt(data.getLocationDt());
+			setLocationId((int) data.getLocationId());
+			setRetourDt(data.getRetourDt());
 
 			setLastUpdated(data.getLastUpdated());
 			setUpdatedBy((String) data.getUpdatedBy());
 		}
 	}
+
 }

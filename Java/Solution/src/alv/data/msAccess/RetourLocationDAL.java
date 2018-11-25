@@ -2,7 +2,6 @@ package alv.data.msAccess;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -11,23 +10,23 @@ import java.util.List;
 import java.util.Map;
 
 import alv.data.ConnectionAdapter;
-import alv.data.IReservationDAL;
-import alv.data.ReservationDto;
+import alv.data.IRetourLocationDAL;
+import alv.data.RetourLocationDto;
 
-public class ReservationDAL extends ConnectionAdapter implements IReservationDAL {
+public class RetourLocationDAL extends ConnectionAdapter implements IRetourLocationDAL {
 
-	public ReservationDAL(Connection connection) {
+	public RetourLocationDAL(Connection connection) {
 		super(connection);
 	}
 
 	@Override
-	public ReservationDto fetch(int id) {
-		ReservationDto dto = new ReservationDto();
+	public RetourLocationDto fetch(int id) {
+		RetourLocationDto dto = new RetourLocationDto();
 		List<Map<String, Object>> results = new ArrayList<Map<String, Object>>();
 		Statement st = null;
 		ResultSet rs = null;
 		try {
-			CallableStatement cstmt = connection.prepareCall("SELECT * FROM tblReservation WHERE Id = ?");
+			CallableStatement cstmt = connection.prepareCall("SELECT * FROM tblRetourLocation WHERE Id = ?");
 			cstmt.setInt(1,id);
 			boolean state = cstmt.execute();
 			int rowsAffected = 0;
@@ -57,7 +56,7 @@ public class ReservationDAL extends ConnectionAdapter implements IReservationDAL
 	}
 
 	@Override
-	public int insert(ReservationDto dto) {
+	public int insert(RetourLocationDto dto) {
 		if (dto != null) {
 			List<Map<String, Object>> results = new ArrayList<Map<String, Object>>();
 			Statement st = null;
@@ -65,14 +64,14 @@ public class ReservationDAL extends ConnectionAdapter implements IReservationDAL
 			try {
 
 				CallableStatement cstmt = connection.prepareCall(
-						"INSERT INTO tblReservation ( Nom, Prenom, Telephone, DateNaissance) VALUES( ?, ?, ?, ?)");
+						"INSERT INTO tblRetourLocation ( LocationId, FicheInspectionId, RetourDt, LastUpdated, UpdatedBy) VALUES( ?, ?, ?, ?, ?)");
 
-				cstmt.setInt(1, dto.getPersonneId());
-				cstmt.setInt(2, dto.getCategoryId());
-				cstmt.setDate(3, (Date) dto.getStartDt());
-				cstmt.setDate(4, dto.getEndDt());
-				cstmt.setBoolean(5, dto.getAssuranceOption());
-				cstmt.setBoolean(6, dto.getKmOption());
+				cstmt.setInt(1, dto.getLocationId());
+				cstmt.setInt(2, dto.getFicheInspectionId());
+				cstmt.setDate(3, dto.getRetourDt());
+				
+				cstmt.setDate(4, dto.getLastUpdated());
+				cstmt.setString(5, dto.getUpdatedBy());
 				
 				
 				cstmt.executeUpdate();
@@ -82,7 +81,7 @@ public class ReservationDAL extends ConnectionAdapter implements IReservationDAL
 				// - call MSAccess query
 				// - obtain the new id using SELECT @@IDENTITY after INSERT
 				//
-				cstmt = connection.prepareCall("SELECT TOP 1 * FROM tblReservation ORDER BY Id DESC");
+				cstmt = connection.prepareCall("SELECT TOP 1 * FROM tblRetourLocation ORDER BY Id DESC");
 
 				boolean state = cstmt.execute();
 				int rowsAffected = 0;
@@ -113,22 +112,22 @@ public class ReservationDAL extends ConnectionAdapter implements IReservationDAL
 	}
 
 	@Override
-	public void update(ReservationDto dto) {
+	public void update(RetourLocationDto dto) {
 		if (dto != null) {
 			Statement st = null;
 			ResultSet rs = null;
 			try {
 
 				CallableStatement cstmt = connection.prepareCall(
-						"UPDATE tblReservation SET Nom = ?, Prenom = ?, Telephone = ?, DateNaissance = ? WHERE Id = ?");
+						"UPDATE tblRetourLocation SET LocationId = ?, FicheInspectionId = ?, RetourDt = ?, LastUpdated = ?, UpdatedBy = ? WHERE Id = ?");
 
-				cstmt.setInt(1, dto.getPersonneId());
-				cstmt.setInt(2, dto.getCategoryId());
-				cstmt.setDate(3, (Date) dto.getStartDt());
-				cstmt.setDate(4, dto.getEndDt());
-				cstmt.setBoolean(5, dto.getAssuranceOption());
-				cstmt.setBoolean(6, dto.getKmOption());
-				cstmt.setInt(7, dto.getId());
+				cstmt.setInt(1, dto.getLocationId());
+				cstmt.setInt(2, dto.getFicheInspectionId());
+				cstmt.setDate(3, dto.getRetourDt());
+				cstmt.setDate(4, dto.getLastUpdated());
+				cstmt.setString(5, dto.getUpdatedBy());
+				
+				cstmt.setInt(6, dto.getId());
 				cstmt.executeUpdate();
 
 			} catch (SQLException e) {
@@ -146,7 +145,7 @@ public class ReservationDAL extends ConnectionAdapter implements IReservationDAL
 		Statement st = null;
 		ResultSet rs = null;
 		try {
-			CallableStatement cstmt = connection.prepareCall("DELETE FROM tblReservation WHERE Id = ?");
+			CallableStatement cstmt = connection.prepareCall("DELETE FROM tblRetourLocation WHERE Id = ?");
 			cstmt.setInt(1, id);
 			cstmt.execute();
 

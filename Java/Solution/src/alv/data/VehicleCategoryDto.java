@@ -16,7 +16,7 @@ public class VehicleCategoryDto {
 		return _id;
 	}
 
-	public void setId(int _id) {
+	protected void setId(int _id) {
 		this._id = _id;
 	}
 
@@ -32,7 +32,7 @@ public class VehicleCategoryDto {
 		return _updatedBy;
 	}
 
-	public void setUpdatedBy(String _updatedBy) {
+	protected void setUpdatedBy(String _updatedBy) {
 		this._updatedBy = _updatedBy;
 	}
 
@@ -40,7 +40,7 @@ public class VehicleCategoryDto {
 		return _lastUpdated;
 	}
 
-	public void setLastUpdated(Date _lastUpdated) {
+	protected void setLastUpdated(Date _lastUpdated) {
 		this._lastUpdated = _lastUpdated;
 	}
 
@@ -50,7 +50,6 @@ public class VehicleCategoryDto {
 			this.setId((int) data.get("ID"));
 			this.setDescription((String) data.get("DESCRIPTION"));
 
-
 			this.setLastUpdated(data.get("LASTUPDATED") == null ? null
 					: Date.valueOf(((Timestamp) data.get("LASTUPDATED")).toLocalDateTime().toLocalDate()));
 			this.setUpdatedBy((String) data.get("UPDATEDBY"));
@@ -58,16 +57,14 @@ public class VehicleCategoryDto {
 
 		}
 	}
-	
 
 	public void loadProperties(VehicleCategoryDto data) {
-		if(data!=null) {
+		if (data != null) {
 			this.setId((int) data.getId());
 			this.setDescription((String) data.getDescription());
 
-
 			this.setLastUpdated(data.getLastUpdated());
 			this.setUpdatedBy((String) data.getUpdatedBy());
-		} 
+		}
 	}
 }
