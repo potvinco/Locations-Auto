@@ -7,8 +7,6 @@ import java.util.Map;
 public class RetourLocationDto {
 	private int _id;
 
-	
-	private int _personneId;
 	private int _locationId;
 	private int _ficheInspectionId;
 
@@ -32,14 +30,6 @@ public class RetourLocationDto {
 
 	public void setRetourDt(Date date) {
 		this._retourDt = date;
-	}
-
-	public int getPersonneId() {
-		return _personneId;
-	}
-
-	public void setPersonneId(int _personneId) {
-		this._personneId = _personneId;
 	}
 
 	public int getFicheInspectionId() {

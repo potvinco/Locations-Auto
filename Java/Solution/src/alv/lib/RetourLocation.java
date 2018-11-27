@@ -12,20 +12,11 @@ import alv.data.msAccess.RetourLocationDAL;
 
 public class RetourLocation extends RetourLocationDto {
 
-	private Personne _personne;
 	private FicheInspection _ficheInspection;
 	Connection conn;
 	private RetourLocationDAL dal;
 
-	// PROPERTIES
-	public Personne getPersonne() {
-		return _personne;
-	}
-
-	private void setPersonne(Personne personne) {
-		_personne = personne;
-	}
-
+	// PROPERTIES	
 	public FicheInspection getFicheInspection() {
 		return _ficheInspection;
 	}
@@ -38,8 +29,6 @@ public class RetourLocation extends RetourLocationDto {
 	private RetourLocation() {
 		initConnection();
 		dal = new RetourLocationDAL(conn);
-
-		_personne = Personne.create();
 		_ficheInspection = FicheInspection.create();
 	}
 
@@ -48,8 +37,6 @@ public class RetourLocation extends RetourLocationDto {
 		dal = new RetourLocationDAL(conn);
 		loadProperties(dal.fetch(id));
 
-		setPersonne(Personne.load(getPersonneId()));
-		//setAdresse(Adresse.load(getAdresseId()));
 		setFicheInspection(FicheInspection.load(getFicheInspectionId()));
 	}
 
@@ -81,9 +68,6 @@ public class RetourLocation extends RetourLocationDto {
 		RetourLocation res = new RetourLocation();
 		res.loadProperties(data);
 
-		if (res.getPersonneId() > 0)
-			res.setPersonne(Personne.load(res.getPersonneId()));
-
 		if (res.getFicheInspectionId() > 0)
 			res.setFicheInspection(FicheInspection.load(res.getFicheInspectionId()));
 
@@ -93,9 +77,6 @@ public class RetourLocation extends RetourLocationDto {
 	public static RetourLocation load(RetourLocationDto data) {
 		RetourLocation res = new RetourLocation();
 		res.loadProperties(data);
-
-		if (res.getPersonneId() > 0)
-			res.setPersonne(Personne.load(res.getPersonneId()));
 
 		if (res.getFicheInspectionId() > 0)
 			res.setFicheInspection(FicheInspection.load(res.getFicheInspectionId()));
@@ -113,11 +94,6 @@ public class RetourLocation extends RetourLocationDto {
 
 	public void save() {
 
-		if (getPersonne() != null) {
-			getPersonne().save();
-			setPersonneId(getPersonne().getId());
-		}
-		
 		if (getFicheInspection() != null) {
 			getFicheInspection().save();
 			setFicheInspectionId(getFicheInspection().getId());
@@ -136,7 +112,6 @@ public class RetourLocation extends RetourLocationDto {
 		if (id != 0) {
 			if (dal.delete(id)) {
 				setId(0);
-				getPersonne().delete();
 				getFicheInspection().delete();
 			}
 		}
