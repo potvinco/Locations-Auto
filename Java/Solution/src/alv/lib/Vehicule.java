@@ -14,8 +14,15 @@ public class Vehicule extends VehiculeDto {
 
 	Connection conn;
 	private VehiculeDAL dal;
+	private VehicleDescription _vehicleDescription;
 
 	//PROPERTIES
+	
+	@Override
+	public void setDescriptionId(int id) {
+		_descriptionId = id;
+		setVehicleDescription(VehicleDescription.load(id));
+	}
 	
 	// CONSTRUCTOR
 	private Vehicule() {
@@ -28,6 +35,14 @@ public class Vehicule extends VehiculeDto {
 		initConnection();
 		dal = new VehiculeDAL(conn);
 		loadProperties(dal.fetch(id));
+	}
+
+	public VehicleDescription getVehicleDescription() {
+		return _vehicleDescription;
+	}
+
+	private void setVehicleDescription(VehicleDescription _vehicleDescription) {
+		this._vehicleDescription = _vehicleDescription;
 	}
 
 	// METHODS

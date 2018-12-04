@@ -5,5 +5,4 @@ public interface IRetourLocationDAL {
 	public int insert(RetourLocationDto dto);
 	public void update(RetourLocationDto dto);
 	public boolean delete(int id);
-
 }

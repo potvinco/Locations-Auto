@@ -2,6 +2,7 @@ package alv.data.msAccess;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -68,8 +69,8 @@ public class LocationDAL extends ConnectionAdapter implements ILocationDAL {
 
 				cstmt.setBoolean(1, dto.getKmOption());
 				cstmt.setBoolean(2, dto.getAssuranceOption());
-				cstmt.setDate(3, dto.getLocationDt());
-				cstmt.setDate(4, dto.getLastUpdated());
+				cstmt.setDate(3, Date.valueOf(dto.getLocationDt()));
+				cstmt.setDate(4, Date.valueOf(dto.getLastUpdated()));
 				cstmt.setString(5, dto.getUpdatedBy());
 				
 				
@@ -122,8 +123,8 @@ public class LocationDAL extends ConnectionAdapter implements ILocationDAL {
 
 				cstmt.setBoolean(1, dto.getKmOption());
 				cstmt.setBoolean(2, dto.getAssuranceOption());
-				cstmt.setDate(3, dto.getLocationDt());
-				cstmt.setDate(4, dto.getLastUpdated());
+				cstmt.setDate(3, Date.valueOf(dto.getLocationDt()));
+				cstmt.setDate(4, Date.valueOf(dto.getLastUpdated()));
 				cstmt.setString(5, dto.getUpdatedBy());
 				
 				cstmt.setInt(6, dto.getId());

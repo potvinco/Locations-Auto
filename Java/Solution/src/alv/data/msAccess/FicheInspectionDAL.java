@@ -73,7 +73,7 @@ public class FicheInspectionDAL extends ConnectionAdapter implements IFicheInspe
 				cstmt.setInt(1, dto.getVehiculeId());
 				cstmt.setString(2, dto.getDescription());
 				cstmt.setInt(3, dto.getEstimatedCost());
-				cstmt.setDate(4, (Date) dto.getInspectionDt());
+				cstmt.setDate(4, Date.valueOf(dto.getInspectionDt()));
 				
 				cstmt.executeUpdate();
 
@@ -125,7 +125,7 @@ public class FicheInspectionDAL extends ConnectionAdapter implements IFicheInspe
 				cstmt.setInt(1, dto.getVehiculeId());
 				cstmt.setString(2, dto.getDescription());
 				cstmt.setInt(3, dto.getEstimatedCost());
-				cstmt.setDate(4, (Date) dto.getInspectionDt());
+				cstmt.setDate(4, Date.valueOf(dto.getInspectionDt()));
 				cstmt.setInt(5, dto.getId());
 				cstmt.executeUpdate();
 

@@ -1,18 +1,17 @@
 package alv.data;
 
-import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.Map;
 
 public class RetourLocationDto {
-	private int _id;
+	protected int _id;
+	protected int _locationId;
+	protected int _ficheInspectionId;
 
-	private int _locationId;
-	private int _ficheInspectionId;
-
-	private Date _retourDt;
-	private String _updatedBy;
-	private Date _lastUpdated;
+	protected LocalDate _retourDt;
+	protected String _updatedBy;
+	protected LocalDate _lastUpdated;
 
 	// PROPERTIES
 	public int getId() {
@@ -24,11 +23,11 @@ public class RetourLocationDto {
 	}
 
 
-	public Date getRetourDt() {
+	public LocalDate getRetourDt() {
 		return _retourDt;
 	}
 
-	public void setRetourDt(Date date) {
+	public void setRetourDt(LocalDate date) {
 		this._retourDt = date;
 	}
 
@@ -56,11 +55,11 @@ public class RetourLocationDto {
 		this._updatedBy = _updatedBy;
 	}
 
-	public Date getLastUpdated() {
+	public LocalDate getLastUpdated() {
 		return _lastUpdated;
 	}
 
-	protected void setLastUpdated(Date _lastUpdated) {
+	protected void setLastUpdated(LocalDate _lastUpdated) {
 		this._lastUpdated = _lastUpdated;
 	}
 
@@ -70,11 +69,9 @@ public class RetourLocationDto {
 			setId((int) data.get("ID"));
 			setFicheInspectionId((int) data.get("FICHEINSPECTIONID"));
 			setLocationId((int) data.get("LOCATIONID"));
-			setRetourDt(data.get("RETOURDT") == null ? null
-					: Date.valueOf(((Timestamp) data.get("RETOURDT")).toLocalDateTime().toLocalDate()));
-
-			setLastUpdated(data.get("LASTUPDATED") == null ? null
-					: Date.valueOf(((Timestamp) data.get("LASTUPDATED")).toLocalDateTime().toLocalDate()));
+			setRetourDt(data.get("RETOURDT") == null ? null : ((Timestamp)data.get("RETOURDT")).toLocalDateTime().toLocalDate());
+			
+			setLastUpdated(data.get("LASTUPDATED") == null ? null : ((Timestamp)data.get("LASTUPDATED")).toLocalDateTime().toLocalDate());
 			setUpdatedBy((String) data.get("UPDATEDBY"));
 		}
 	}
