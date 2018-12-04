@@ -100,6 +100,11 @@ public class Location extends LocationDto {
 	}
 
 	// METHODS
+	public int calculatePrice()
+	{
+		return 0;
+	}
+	
 	private void initConnection() {
 		try {
 			if (conn == null) {

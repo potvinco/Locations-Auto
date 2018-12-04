@@ -28,7 +28,6 @@ public class Vehicule extends VehiculeDto {
 	private Vehicule() {
 		initConnection();
 		dal = new VehiculeDAL(conn);
-
 	}
 
 	private Vehicule(int id) {
