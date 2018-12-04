@@ -67,9 +67,10 @@ public class VehicleCategoryDAL extends ConnectionAdapter implements IVehicleCat
 			try {
 
 				CallableStatement cstmt = connection.prepareCall(
-						"INSERT INTO tblVehicleCategory( Description) VALUES( ?)");
+						"INSERT INTO tblVehicleCategory( Description, PrixLocation) VALUES( ?, ?)");
 
 				cstmt.setString(1, dto.getDescription());
+				cstmt.setInt(2, dto.getPrixLocation());
 				
 				cstmt.executeUpdate();
 
@@ -78,7 +79,7 @@ public class VehicleCategoryDAL extends ConnectionAdapter implements IVehicleCat
 				// - call MSAccess query
 				// - obtain the new id using SELECT @@IDENTITY after INSERT
 				//
-				cstmt = connection.prepareCall("SELECT TOP 1 * FROM tblPersonne ORDER BY Id DESC");
+				cstmt = connection.prepareCall("SELECT TOP 1 * FROM tblVehicleCategory ORDER BY Id DESC");
 
 				boolean state = cstmt.execute();
 				int rowsAffected = 0;
@@ -116,11 +117,12 @@ public class VehicleCategoryDAL extends ConnectionAdapter implements IVehicleCat
 			try {
 
 				CallableStatement cstmt = connection.prepareCall(
-						"UPDATE tblPersonne SET Description = ? WHERE Id = ?");
+						"UPDATE tblVehicleCategory SET Description = ?, PrixLocation = ? WHERE Id = ?");
 
 				cstmt.setString(1, dto.getDescription());
+				cstmt.setInt(2, dto.getPrixLocation());
 
-				cstmt.setInt(6, dto.getId());
+				cstmt.setInt(3, dto.getId());
 				cstmt.executeUpdate();
 
 			} catch (SQLException e) {

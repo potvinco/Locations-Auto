@@ -69,8 +69,8 @@ public class ReservationDAL extends ConnectionAdapter implements IReservationDAL
 
 				cstmt.setInt(1, dto.getPersonneId());
 				cstmt.setInt(2, dto.getCategoryId());
-				cstmt.setDate(3, (Date) dto.getStartDt());
-				cstmt.setDate(4, dto.getEndDt());
+				cstmt.setDate(3, Date.valueOf(dto.getStartDt()));
+				cstmt.setDate(4, Date.valueOf(dto.getEndDt()));
 				cstmt.setBoolean(5, dto.getAssuranceOption());
 				cstmt.setBoolean(6, dto.getKmOption());
 				
@@ -124,8 +124,8 @@ public class ReservationDAL extends ConnectionAdapter implements IReservationDAL
 
 				cstmt.setInt(1, dto.getPersonneId());
 				cstmt.setInt(2, dto.getCategoryId());
-				cstmt.setDate(3, (Date) dto.getStartDt());
-				cstmt.setDate(4, dto.getEndDt());
+				cstmt.setDate(3, Date.valueOf( dto.getStartDt()));
+				cstmt.setDate(4, Date.valueOf(dto.getEndDt()));
 				cstmt.setBoolean(5, dto.getAssuranceOption());
 				cstmt.setBoolean(6, dto.getKmOption());
 				cstmt.setInt(7, dto.getId());

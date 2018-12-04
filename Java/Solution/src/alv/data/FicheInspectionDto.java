@@ -1,18 +1,17 @@
 package alv.data;
 
 import java.sql.Date;
-import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.Map;
 
 public class FicheInspectionDto {
-	private int _id;
-	// private int _locationId;
-	private int _vehiculeId;
-	private String _description;
-	private int _estimatedCost;
-	private Date _inspectionDt;
-	private String _updatedBy;
-	private Date _lastUpdated;
+	protected int _id;
+	protected int _vehiculeId;
+	protected String _description;
+	protected int _estimatedCost;
+	protected LocalDate _inspectionDt;
+	protected String _updatedBy;
+	protected LocalDate _lastUpdated;
 
 	// PROPERTIES
 	public int getId() {
@@ -39,11 +38,11 @@ public class FicheInspectionDto {
 		this._estimatedCost = _estimatedCost;
 	}
 
-	public Date getInspectionDt() {
+	public LocalDate getInspectionDt() {
 		return _inspectionDt;
 	}
 
-	public void setInspectionDt(Date _inspectionDt) {
+	public void setInspectionDt(LocalDate _inspectionDt) {
 		this._inspectionDt = _inspectionDt;
 	}
 
@@ -63,11 +62,11 @@ public class FicheInspectionDto {
 		this._updatedBy = _updatedBy;
 	}
 
-	public Date getLastUpdated() {
+	public LocalDate getLastUpdated() {
 		return _lastUpdated;
 	}
 
-	protected void setLastUpdated(Date _lastUpdated) {
+	protected void setLastUpdated(LocalDate _lastUpdated) {
 		this._lastUpdated = _lastUpdated;
 	}
 
@@ -78,12 +77,9 @@ public class FicheInspectionDto {
 			setVehiculeId((int) data.get("VEHICULEID"));
 			setDescription((String) data.get("DESCRIPTION"));
 			setEstimatedCost((int) data.get("ESTIMATEDCOST"));
-			setInspectionDt(data.get("INSPECTIONDT") == null ? null
-					: Date.valueOf(((Timestamp) data.get("INSPECTIONDT")).toLocalDateTime().toLocalDate()));
-
-			// setLastUpdated((Date) data.get("LASTUPDATED"));
-			setLastUpdated(data.get("LASTUPDATED") == null ? null
-					: Date.valueOf(((Timestamp) data.get("LASTUPDATED")).toLocalDateTime().toLocalDate()));
+			setInspectionDt(data.get("INSPECTIONDT") == null ? null : ((Date)data.get("INSPECTIONDT")).toLocalDate());
+			
+			setLastUpdated(data.get("LASTUPDATED") == null ? null : ((Date)data.get("LASTUPDATED")).toLocalDate());
 			setUpdatedBy((String) data.get("UPDATEDBY"));
 		}
 	}

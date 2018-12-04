@@ -1,3 +1,4 @@
+import java.time.*;
 import alv.lib.Personne;
 import alv.lib.Reservation;
 import alv.lib.Reservations;
@@ -12,10 +13,12 @@ public class Main {
 	private static void Test_Reservations() {
 
 		System.out.println("Test_Reservations");
-		
 		Reservations col = Reservations.load();
+		col.getItems().get(0).getEndDt();
+		
 		col.getItems().forEach(item -> {
 			System.out.println(item.getEndDt());
+			System.out.println(item.getPersonne().getDateNaissance());
 			;
 		});
 	}
@@ -37,6 +40,8 @@ public class Main {
 		Personne per = Personne.create();
 		per.setNom("name");
 		per.getAdresse().setAdresse("new address value");
+		LocalDate date = LocalDate.now();
+		per.setDateNaissance(date);
 		per.save();
 		System.out.println(per.getId());
 		System.out.println(per.getNom());

@@ -1,17 +1,17 @@
 package alv.data;
 
-import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.Map;
 
 public class VehiculeDto {
-	private int _id;
-	private int _lookUpId;
-	private String _noSerie;
-	private String _immatriculation;
-	// private String _km;
-	private String _updatedBy;
-	private Date _lastUpdated;
+	protected int _id;
+	protected int _descriptionId;
+	protected String _noSerie;
+	protected String _immatriculation;
+
+	protected String _updatedBy;
+	protected LocalDate _lastUpdated;
 
 	// PROPERTIES
 	public int getId() {
@@ -22,12 +22,12 @@ public class VehiculeDto {
 		this._id = _id;
 	}
 
-	public int getLookUpId() {
-		return _lookUpId;
+	public int getDescriptionId() {
+		return _descriptionId;
 	}
 
-	public void setLookUpId(int _lookUpId) {
-		this._lookUpId = _lookUpId;
+	public void setDescriptionId(int id) {
+		this._descriptionId = id;
 	}
 
 	public String getNoSerie() {
@@ -54,11 +54,11 @@ public class VehiculeDto {
 		this._updatedBy = _updatedBy;
 	}
 
-	public Date getLastUpdated() {
+	public LocalDate getLastUpdated() {
 		return _lastUpdated;
 	}
 
-	protected void setLastUpdated(Date _lastUpdated) {
+	protected void setLastUpdated(LocalDate _lastUpdated) {
 		this._lastUpdated = _lastUpdated;
 	}
 
@@ -66,13 +66,11 @@ public class VehiculeDto {
 	public void loadProperties(Map<String, Object> data) {
 		if (data != null) {
 			setId((int) data.get("ID"));
-			setLookUpId((int) data.get("LOOKUPID"));
+			setDescriptionId((int) data.get("LOOKUPID"));
 			setNoSerie((String) data.get("NOSERIE"));
 			setImmatriculation((String) data.get("IMMAtRICULAtION"));
 
-			// setLastUpdated((Date) data.get("LASTUPDATED"));
-			setLastUpdated(data.get("LASTUPDATED") == null ? null
-					: Date.valueOf(((Timestamp) data.get("LASTUPDATED")).toLocalDateTime().toLocalDate()));
+			setLastUpdated(data.get("LASTUPDATED") == null ? null : ((Timestamp)data.get("LASTUPDATED")).toLocalDateTime().toLocalDate());
 			setUpdatedBy((String) data.get("UPDATEDBY"));
 		}
 	}
@@ -80,7 +78,7 @@ public class VehiculeDto {
 	public void loadProperties(VehiculeDto data) {
 		if (data != null) {
 			setId((int) data.getId());
-			setLookUpId((int) data.getLookUpId());
+			setDescriptionId((int) data.getDescriptionId());
 			setNoSerie((String) data.getNoSerie());
 			setImmatriculation((String) data.getImmatriculation());
 

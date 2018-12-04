@@ -12,7 +12,6 @@ import alv.data.msAccess.VehicleCategoryDAL;
 
 public class VehicleCategory extends VehicleCategoryDto {
 
-	//private VehicleCategoryDto _dto = new VehicleCategoryDto();
 	Connection conn;
 	private VehicleCategoryDAL dal;
 

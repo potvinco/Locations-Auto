@@ -19,6 +19,12 @@ public class Personne extends PersonneDto {
 	public Adresse getAdresse() {return _adresse;}
 	private void setAdresse(Adresse adresse) {_adresse = adresse;}
 	
+	//@Override 
+//	public void setNom(String nom) {
+//		this._nom = nom;
+//	}
+	
+	
 	// CONSTRUCTOR
 	private Personne() {
 		initConnection();

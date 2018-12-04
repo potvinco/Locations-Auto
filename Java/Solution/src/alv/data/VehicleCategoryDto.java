@@ -1,15 +1,16 @@
 package alv.data;
 
-import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.Map;
 
 public class VehicleCategoryDto {
-	private int _id;
-	private String _description;
+	protected int _id;
+	protected String _description;
+	protected int _prixLocation;
 
-	private String _updatedBy;
-	private Date _lastUpdated;
+	protected String _updatedBy;
+	protected LocalDate _lastUpdated;
 
 	// PROPERTIES
 	public int getId() {
@@ -19,7 +20,15 @@ public class VehicleCategoryDto {
 	protected void setId(int _id) {
 		this._id = _id;
 	}
+	
+	public int getPrixLocation() {
+		return _prixLocation;
+	}
 
+	public void setPrixLocation(int value) {
+		this._prixLocation = value;
+	}
+	
 	public String getDescription() {
 		return _description;
 	}
@@ -36,23 +45,22 @@ public class VehicleCategoryDto {
 		this._updatedBy = _updatedBy;
 	}
 
-	public Date getLastUpdated() {
+	public LocalDate getLastUpdated() {
 		return _lastUpdated;
 	}
 
-	protected void setLastUpdated(Date _lastUpdated) {
+	protected void setLastUpdated(LocalDate _lastUpdated) {
 		this._lastUpdated = _lastUpdated;
 	}
 
 	// METHODS
 	public void loadProperties(Map<String, Object> data) {
 		try {
-			this.setId((int) data.get("ID"));
-			this.setDescription((String) data.get("DESCRIPTION"));
+			setId((int) data.get("ID"));
+			setDescription((String) data.get("DESCRIPTION"));
 
-			this.setLastUpdated(data.get("LASTUPDATED") == null ? null
-					: Date.valueOf(((Timestamp) data.get("LASTUPDATED")).toLocalDateTime().toLocalDate()));
-			this.setUpdatedBy((String) data.get("UPDATEDBY"));
+			setLastUpdated(data.get("LASTUPDATED") == null ? null : ((Timestamp)data.get("LASTUPDATED")).toLocalDateTime().toLocalDate());
+			setUpdatedBy((String) data.get("UPDATEDBY"));
 		} catch (NullPointerException ex) {
 
 		}

@@ -1,19 +1,19 @@
 package alv.data;
 
-import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.Map;
 
 public class ReservationDto {
-	private int _id;
-	private int _personneId;
-	private int _categoryId;
-	private Date _startDt;
-	private Date _endDt;
-	private boolean _assuranceOption;
-	private boolean _kmOption;
-	private String _updatedBy;
-	private Date _lastUpdated;
+	protected int _id;
+	protected int _personneId;
+	protected int _categoryId;
+	protected LocalDate _startDt;
+	protected LocalDate _endDt;
+	protected boolean _assuranceOption;
+	protected boolean _kmOption;
+	protected String _updatedBy;
+	protected LocalDate _lastUpdated;
 
 	// PROPERTIES
 	public int getId() {
@@ -24,19 +24,19 @@ public class ReservationDto {
 		this._id = _id;
 	}
 
-	public Date getStartDt() {
+	public LocalDate getStartDt() {
 		return _startDt;
 	}
 
-	public void setStartDt(Date _startDt) {
+	public void setStartDt(LocalDate _startDt) {
 		this._startDt = _startDt;
 	}
 
-	public Date getEndDt() {
+	public LocalDate getEndDt() {
 		return _endDt;
 	}
 
-	public void setEndDt(Date _endDt) {
+	public void setEndDt(LocalDate _endDt) {
 		this._endDt = _endDt;
 	}
 
@@ -72,11 +72,11 @@ public class ReservationDto {
 		this._updatedBy = _updatedBy;
 	}
 
-	public Date getLastUpdated() {
+	public LocalDate getLastUpdated() {
 		return _lastUpdated;
 	}
 
-	protected void setLastUpdated(Date _lastUpdated) {
+	protected void setLastUpdated(LocalDate _lastUpdated) {
 		this._lastUpdated = _lastUpdated;
 	}
 
@@ -93,15 +93,14 @@ public class ReservationDto {
 		try {
 			this.setId((int) data.get("ID"));
 			this.setPersonneId((int) data.get("PERSONNEID"));
-			this.setStartDt(data.get("STARTDT") == null ? null
-					: Date.valueOf(((Timestamp) data.get("STARTDT")).toLocalDateTime().toLocalDate()));
-			this.setEndDt(data.get("ENDDT") == null ? null
-					: Date.valueOf(((Timestamp) data.get("ENDDT")).toLocalDateTime().toLocalDate()));
+			setStartDt(data.get("STARTDT") == null ? null : ((Timestamp)data.get("STARTDT")).toLocalDateTime().toLocalDate());
+			setEndDt(data.get("ENDDT") == null ? null : ((Timestamp)data.get("ENDDT")).toLocalDateTime().toLocalDate());
+			
 			this.setCategoryId((int) data.get("CATEGORYID"));
 			this.setAssuranceOption((boolean) data.get("ASSURANCEOPTIONID"));
 			this.setKmOption((boolean) data.get("KMOPTIONID"));
-			this.setLastUpdated(data.get("LASTUPDATED") == null ? null
-					: Date.valueOf(((Timestamp) data.get("LASTUPDATED")).toLocalDateTime().toLocalDate()));
+			setLastUpdated(data.get("LASTUPDATED") == null ? null : ((Timestamp)data.get("LASTUPDATED")).toLocalDateTime().toLocalDate());
+			
 			this.setUpdatedBy((String) data.get("UPDATEDBY"));
 		} catch (NullPointerException ex) {
 

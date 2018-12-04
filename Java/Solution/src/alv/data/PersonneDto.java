@@ -2,17 +2,20 @@ package alv.data;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+//import java.sql.Date;
+//import java.sql.Timestamp;
 import java.util.Map;
 
 public class PersonneDto {
-	private int _id;
-	private int _adresseId;
-	private String _nom;
-	private String _prenom;
-	private String _telephone;
-	private Date _dateNaissance;
-	private String _updatedBy;
-	private Date _lastUpdated;
+	protected int _id;
+	protected int _adresseId;
+	protected String _nom;
+	protected String _prenom;
+	protected String _telephone;
+	protected LocalDate _dateNaissance;
+	protected String _updatedBy;
+	protected LocalDate _lastUpdated;
 
 	// PROPERTIES
 	public int getId() {
@@ -47,11 +50,11 @@ public class PersonneDto {
 		this._telephone = _telephone;
 	}
 
-	public Date getDateNaissance() {
+	public LocalDate getDateNaissance() {
 		return _dateNaissance;
 	}
 
-	public void setDateNaissance(Date _dateNaissance) {
+	public void setDateNaissance(LocalDate _dateNaissance) {
 		this._dateNaissance = _dateNaissance;
 	}
 
@@ -71,11 +74,11 @@ public class PersonneDto {
 		this._updatedBy = _updatedBy;
 	}
 
-	public Date getLastUpdated() {
+	public LocalDate getLastUpdated() {
 		return _lastUpdated;
 	}
 
-	protected void setLastUpdated(Date _lastUpdated) {
+	protected void setLastUpdated(LocalDate _lastUpdated) {
 		this._lastUpdated = _lastUpdated;
 	}
 
@@ -86,12 +89,9 @@ public class PersonneDto {
 			setNom((String) data.get("NOM"));
 			setPrenom((String) data.get("PRENOM"));
 			setTelephone((String) data.get("TELEPHONE"));
-			setDateNaissance(data.get("DATENAISSANCE") == null ? null
-					: Date.valueOf(((Timestamp) data.get("DATENAISSANCE")).toLocalDateTime().toLocalDate()));
-
-			// setLastUpdated((Date) data.get("LASTUPDATED"));
-			setLastUpdated(data.get("LASTUPDATED") == null ? null
-					: Date.valueOf(((Timestamp) data.get("LASTUPDATED")).toLocalDateTime().toLocalDate()));
+			setDateNaissance(data.get("DATENAISSANCE") == null ? null : ((Timestamp)data.get("DATENAISSANCE")).toLocalDateTime().toLocalDate());
+						
+			setLastUpdated(data.get("LASTUPDATED") == null ? null : ((Timestamp)data.get("LASTUPDATED")).toLocalDateTime().toLocalDate());
 			setUpdatedBy((String) data.get("UPDATEDBY"));
 		}
 	}
@@ -108,4 +108,5 @@ public class PersonneDto {
 			setUpdatedBy((String) data.getUpdatedBy());
 		}
 	}
+
 }

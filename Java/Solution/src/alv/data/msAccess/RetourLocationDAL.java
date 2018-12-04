@@ -2,6 +2,7 @@ package alv.data.msAccess;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -68,9 +69,9 @@ public class RetourLocationDAL extends ConnectionAdapter implements IRetourLocat
 
 				cstmt.setInt(1, dto.getLocationId());
 				cstmt.setInt(2, dto.getFicheInspectionId());
-				cstmt.setDate(3, dto.getRetourDt());
+				cstmt.setDate(3, Date.valueOf(dto.getRetourDt()));
 				
-				cstmt.setDate(4, dto.getLastUpdated());
+				cstmt.setDate(4, Date.valueOf(dto.getLastUpdated()));
 				cstmt.setString(5, dto.getUpdatedBy());
 				
 				
@@ -123,8 +124,8 @@ public class RetourLocationDAL extends ConnectionAdapter implements IRetourLocat
 
 				cstmt.setInt(1, dto.getLocationId());
 				cstmt.setInt(2, dto.getFicheInspectionId());
-				cstmt.setDate(3, dto.getRetourDt());
-				cstmt.setDate(4, dto.getLastUpdated());
+				cstmt.setDate(3, Date.valueOf(dto.getRetourDt()));
+				cstmt.setDate(4, Date.valueOf(dto.getLastUpdated()));
 				cstmt.setString(5, dto.getUpdatedBy());
 				
 				cstmt.setInt(6, dto.getId());

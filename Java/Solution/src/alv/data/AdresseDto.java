@@ -1,17 +1,17 @@
 package alv.data;
 
+import java.time.LocalDate;
 import java.sql.Timestamp;
-import java.sql.Date;
 import java.util.Map;
 
 public class AdresseDto {
-	private int _id;
-	private String _adresse;
-	private String _ville;
-	private String _province;
-	private String _codePostal;
-	private String _updatedBy;
-	private Date _lastUpdated;
+	protected int _id;
+	protected String _adresse;
+	protected String _ville;
+	protected int _provinceId;
+	protected String _codePostal;
+	protected String _updatedBy;
+	protected LocalDate _lastUpdated;
 
 	// PROPERTIES
 	public int getId() {
@@ -46,12 +46,12 @@ public class AdresseDto {
 		this._codePostal = _codePostal;
 	}
 
-	public String getProvince() {
-		return _province;
+	public int getProvinceId() {
+		return _provinceId;
 	}
 
-	public void setProvince(String _province) {
-		this._province = _province;
+	public void setProvinceId(int id) {
+		this._provinceId = id;
 	}
 
 	public String getUpdatedBy() {
@@ -62,11 +62,11 @@ public class AdresseDto {
 		this._updatedBy = _updatedBy;
 	}
 
-	public Date getLastUpdated() {
+	public LocalDate getLastUpdated() {
 		return _lastUpdated;
 	}
 
-	protected void setLastUpdated(Date _lastUpdated) {
+	protected void setLastUpdated(LocalDate _lastUpdated) {
 		this._lastUpdated = _lastUpdated;
 	}
 
@@ -77,11 +77,9 @@ public class AdresseDto {
 			setAdresse((String) data.get("ADRESSE"));
 			setVille((String) data.get("VILLE"));
 			setCodePostal((String) data.get("CODEPOSTAL"));
-			setProvince((String) data.get("PROVINCE"));
+			setProvinceId((int) data.get("PROVINCEID"));
 
-			// setLastUpdated((Date) data.get("LASTUPDATED"));
-			setLastUpdated(data.get("LASTUPDATED") == null ? null
-					: Date.valueOf(((Timestamp) data.get("LASTUPDATED")).toLocalDateTime().toLocalDate()));
+			setLastUpdated(data.get("LASTUPDATED") == null ? null : ((Timestamp)data.get("LASTUPDATED")).toLocalDateTime().toLocalDate());
 			setUpdatedBy((String) data.get("UPDATEDBY"));
 		}
 	}
@@ -92,9 +90,8 @@ public class AdresseDto {
 			setAdresse((String) data.getAdresse());
 			setVille((String) data.getVille());
 			setCodePostal((String) data.getCodePostal());
-			setProvince((String) data.getProvince());
+			setProvinceId((int) data.getProvinceId());
 
-			// setLastUpdated((Date) data.get("LASTUPDATED"));
 			setLastUpdated(data.getLastUpdated());
 			setUpdatedBy((String) data.getUpdatedBy());
 		}
