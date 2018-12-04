@@ -8,8 +8,10 @@ public class FicheInspectionDto {
 	protected int _id;
 	protected int _vehiculeId;
 	protected String _description;
-	protected int _estimatedCost;
+	private int _litreCarburant;
+	protected int _coutDommages;
 	protected LocalDate _inspectionDt;
+	
 	protected String _updatedBy;
 	protected LocalDate _lastUpdated;
 
@@ -30,12 +32,12 @@ public class FicheInspectionDto {
 		this._description = _description;
 	}
 
-	public int getEstimatedCost() {
-		return _estimatedCost;
+	public int getCoutDommages() {
+		return _coutDommages;
 	}
 
-	public void setEstimatedCost(int _estimatedCost) {
-		this._estimatedCost = _estimatedCost;
+	public void setCoutDommages(int value) {
+		this._coutDommages = value;
 	}
 
 	public LocalDate getInspectionDt() {
@@ -52,6 +54,14 @@ public class FicheInspectionDto {
 
 	public void setVehiculeId(int _vehiculeId) {
 		this._vehiculeId = _vehiculeId;
+	}
+
+	public int getLitreCarburant() {
+		return _litreCarburant;
+	}
+
+	public void setLitreCarburant(int _litreCarburant) {
+		this._litreCarburant = _litreCarburant;
 	}
 
 	public String getUpdatedBy() {
@@ -76,7 +86,8 @@ public class FicheInspectionDto {
 			setId((int) data.get("ID"));
 			setVehiculeId((int) data.get("VEHICULEID"));
 			setDescription((String) data.get("DESCRIPTION"));
-			setEstimatedCost((int) data.get("ESTIMATEDCOST"));
+			setLitreCarburant((int) data.get("LITRECARBURANT"));
+			setCoutDommages((int) data.get("ESTIMATEDCOST"));
 			setInspectionDt(data.get("INSPECTIONDT") == null ? null : ((Date)data.get("INSPECTIONDT")).toLocalDate());
 			
 			setLastUpdated(data.get("LASTUPDATED") == null ? null : ((Date)data.get("LASTUPDATED")).toLocalDate());
@@ -89,7 +100,8 @@ public class FicheInspectionDto {
 			setId((int) data.getId());
 			setVehiculeId((int) data.getVehiculeId());
 			setDescription((String) data.getDescription());
-			setEstimatedCost((int) data.getEstimatedCost());
+			setLitreCarburant((int) data.getLitreCarburant());
+			setCoutDommages((int) data.getCoutDommages());
 			setInspectionDt(data.getInspectionDt());
 
 			setLastUpdated(data.getLastUpdated());

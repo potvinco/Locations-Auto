@@ -68,12 +68,13 @@ public class FicheInspectionDAL extends ConnectionAdapter implements IFicheInspe
 			try {
 
 				CallableStatement cstmt = connection.prepareCall(
-						"INSERT INTO tblFicheInspection ( VehiculeId, Description, EstimatedCost, InspectionDt) VALUES( ?, ?, ?, ?)");
+						"INSERT INTO tblFicheInspection ( VehiculeId, Description, EstimatedCost,LitreCarburant, InspectionDt) VALUES( ?, ?, ?, ?, ?)");
 
 				cstmt.setInt(1, dto.getVehiculeId());
 				cstmt.setString(2, dto.getDescription());
-				cstmt.setInt(3, dto.getEstimatedCost());
-				cstmt.setDate(4, Date.valueOf(dto.getInspectionDt()));
+				cstmt.setInt(3, dto.getCoutDommages());
+				cstmt.setInt(4, dto.getLitreCarburant());
+				cstmt.setDate(5, Date.valueOf(dto.getInspectionDt()));
 				
 				cstmt.executeUpdate();
 
@@ -120,13 +121,14 @@ public class FicheInspectionDAL extends ConnectionAdapter implements IFicheInspe
 			try {
 
 				CallableStatement cstmt = connection.prepareCall(
-						"UPDATE tblFicheInspection SET VehiculeId = ?, Description = ?, EstimatedCost = ?, IspectionDt = ? WHERE Id = ?");
+						"UPDATE tblFicheInspection SET VehiculeId = ?, Description = ?, EstimatedCost = ?, LitreCarburant = ?, IspectionDt = ? WHERE Id = ?");
 
 				cstmt.setInt(1, dto.getVehiculeId());
 				cstmt.setString(2, dto.getDescription());
-				cstmt.setInt(3, dto.getEstimatedCost());
-				cstmt.setDate(4, Date.valueOf(dto.getInspectionDt()));
-				cstmt.setInt(5, dto.getId());
+				cstmt.setInt(3, dto.getCoutDommages());
+				cstmt.setInt(4, dto.getLitreCarburant());
+				cstmt.setDate(5, Date.valueOf(dto.getInspectionDt()));
+				cstmt.setInt(6, dto.getId());
 				cstmt.executeUpdate();
 
 			} catch (SQLException e) {

@@ -10,6 +10,7 @@ public class PermisConduireDto {
 	protected String _numero;
 	protected int _countryId;
 	protected int _provinceId;
+	protected int _classePermisConduireId;
 	protected LocalDate _dateExpiration;
 	protected LocalDate _dateEmission;
 	protected String _updatedBy;
@@ -31,6 +32,14 @@ public class PermisConduireDto {
 
 	public void setNumero(String value) {
 		this._numero = value;
+	}
+
+	public int getClassePermisConduireId() {
+		return _classePermisConduireId;
+	}
+
+	public void setClassePermisConduireId(int _classePermisConduireId) {
+		this._classePermisConduireId = _classePermisConduireId;
 	}
 
 	public int getPersonneId() {
@@ -97,6 +106,7 @@ public class PermisConduireDto {
 			setPersonneId((int) data.get("PERSONNEID"));
 			setCountryId((int) data.get("COUNTRYID"));
 			setProvinceId((int) data.get("PROVINCEID"));
+			setProvinceId((int) data.get("CLASSEPERMISCONDUIREID"));
 
 			setDateExpiration(data.get("DATEEXPIRATION") == null ? null : ((Timestamp)data.get("DATEEXPIRATION")).toLocalDateTime().toLocalDate());
 			setDateEmission(data.get("DATEEMISSION") == null ? null : ((Timestamp)data.get("DATEEMISSION")).toLocalDateTime().toLocalDate());
@@ -114,6 +124,7 @@ public class PermisConduireDto {
 			setPersonneId((int) data.getPersonneId());
 			setCountryId((int) data.getCountryId());
 			setProvinceId((int) data.getProvinceId());
+			setClassePermisConduireId((int) data.getClassePermisConduireId());
 			setDateExpiration(data.getDateExpiration());
 			setDateEmission(data.getDateEmission());
 			

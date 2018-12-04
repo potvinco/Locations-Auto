@@ -66,14 +66,15 @@ public class PermisConduireDAL extends ConnectionAdapter implements IPermisCondu
 			try {
 
 				CallableStatement cstmt = connection.prepareCall(
-						"INSERT INTO tblPermisConduire ( Numero, PersonneId, CountryId, ProvinceId, DateExpiration, DateEmission) VALUES( ?, ?, ?, ?, ?, ?)");
+						"INSERT INTO tblPermisConduire ( Numero, PersonneId, CountryId, ProvinceId, ClassePermisConduireId, DateExpiration, DateEmission) VALUES( ?, ?, ?, ?, ?, ?, ?)");
 
 				cstmt.setString(1, dto.getNumero());
 				cstmt.setInt(2, dto.getPersonneId());
 				cstmt.setInt(3, dto.getCountryId());
 				cstmt.setInt(4, dto.getProvinceId());
-				cstmt.setDate(5, Date.valueOf(dto.getDateExpiration()));
-				cstmt.setDate(6, Date.valueOf(dto.getDateEmission()));
+				cstmt.setInt(5, dto.getClassePermisConduireId());
+				cstmt.setDate(6, Date.valueOf(dto.getDateExpiration()));
+				cstmt.setDate(7, Date.valueOf(dto.getDateEmission()));
 				cstmt.executeUpdate();
 
 				// SELECT NEW ID
@@ -119,15 +120,16 @@ public class PermisConduireDAL extends ConnectionAdapter implements IPermisCondu
 			try {
 
 				CallableStatement cstmt = connection.prepareCall(
-						"UPDATE tblPermisConduire SET Numero = ?, PersonneId = ?, CountryId = ?, ProvinceId = ?, DateExpiration = ?, DateEmission = ? WHERE Id = ?");
+						"UPDATE tblPermisConduire SET Numero = ?, PersonneId = ?, CountryId = ?, ProvinceId = ?, ClassePermisConduireId = ?, DateExpiration = ?, DateEmission = ? WHERE Id = ?");
 
 				cstmt.setString(1, dto.getNumero());
 				cstmt.setInt(2, dto.getPersonneId());
 				cstmt.setInt(3, dto.getCountryId());
 				cstmt.setInt(4, dto.getProvinceId());
-				cstmt.setDate(5, Date.valueOf(dto.getDateExpiration()));
-				cstmt.setDate(6, Date.valueOf(dto.getDateEmission()));
-				cstmt.setInt(7, dto.getId());
+				cstmt.setInt(5, dto.getClassePermisConduireId());
+				cstmt.setDate(6, Date.valueOf(dto.getDateExpiration()));
+				cstmt.setDate(7, Date.valueOf(dto.getDateEmission()));
+				cstmt.setInt(8, dto.getId());
 				cstmt.executeUpdate();
 
 			} catch (SQLException e) {
