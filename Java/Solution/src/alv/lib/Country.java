@@ -51,7 +51,8 @@ public class Country extends CountryDto {
 			e.printStackTrace();
 		}
 	}
-	public static Country load(Map<String, Object> data) {
+	
+	protected static Country load(Map<String, Object> data) {
 		Country res = new Country();
 		res.loadProperties(data);
 

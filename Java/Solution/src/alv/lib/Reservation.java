@@ -60,7 +60,7 @@ public class Reservation extends ReservationDto {
 	}
 
 	//this method will be used when the object is a child of Reservations
-	public static Reservation load(Map<String, Object> data) {
+	protected static Reservation load(Map<String, Object> data) {
 		Reservation res = new Reservation();
 		res.loadProperties(data);
 		

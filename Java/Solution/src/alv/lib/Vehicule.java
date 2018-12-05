@@ -68,7 +68,7 @@ public class Vehicule extends VehiculeDto {
 	}
 
 	//this method will be used when the object is a child of Vehicules
-	public static Vehicule load(Map<String, Object> data) {
+	protected static Vehicule load(Map<String, Object> data) {
 		Vehicule res = new Vehicule();
 		res.loadProperties(data);
 		

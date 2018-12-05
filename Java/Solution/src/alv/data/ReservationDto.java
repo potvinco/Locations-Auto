@@ -8,6 +8,7 @@ public class ReservationDto {
 	protected int _id;
 	protected int _personneId;
 	protected int _categoryId;
+	protected int _vehiculeId;
 	protected LocalDate _startDt;
 	protected LocalDate _endDt;
 	protected boolean _assuranceOption;
@@ -46,6 +47,14 @@ public class ReservationDto {
 
 	public void setCategoryId(int _categoryId) {
 		this._categoryId = _categoryId;
+	}
+
+	public int getVehiculeId() {
+		return _vehiculeId;
+	}
+
+	public void setVehiculeId(int _vehiculeId) {
+		this._vehiculeId = _vehiculeId;
 	}
 
 	public boolean getAssuranceOption() {

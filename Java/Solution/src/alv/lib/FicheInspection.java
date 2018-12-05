@@ -61,7 +61,7 @@ public class FicheInspection extends FicheInspectionDto {
 	}
 
 	//this method will be used when the object is a child of FicheInspections
-	public static FicheInspection load(Map<String, Object> data) {
+	protected static FicheInspection load(Map<String, Object> data) {
 		FicheInspection res = new FicheInspection();
 		res.loadProperties(data);
 		

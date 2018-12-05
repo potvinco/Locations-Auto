@@ -1,10 +1,7 @@
 package alv.data;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
-//import java.sql.Date;
-//import java.sql.Timestamp;
 import java.util.Map;
 
 public class PersonneDto {
@@ -13,6 +10,7 @@ public class PersonneDto {
 	protected String _nom;
 	protected String _prenom;
 	protected String _telephone;
+	protected String _email;
 	protected LocalDate _dateNaissance;
 	protected String _updatedBy;
 	protected LocalDate _lastUpdated;
@@ -58,6 +56,14 @@ public class PersonneDto {
 		this._dateNaissance = _dateNaissance;
 	}
 
+	public String getEmail() {
+		return _email;
+	}
+
+	public void setEmail(String _email) {
+		this._email = _email;
+	}
+
 	public int getAdresseId() {
 		return _adresseId;
 	}
@@ -89,6 +95,7 @@ public class PersonneDto {
 			setNom((String) data.get("NOM"));
 			setPrenom((String) data.get("PRENOM"));
 			setTelephone((String) data.get("TELEPHONE"));
+			setEmail((String) data.get("EMAIL"));
 			setDateNaissance(data.get("DATENAISSANCE") == null ? null : ((Timestamp)data.get("DATENAISSANCE")).toLocalDateTime().toLocalDate());
 						
 			setLastUpdated(data.get("LASTUPDATED") == null ? null : ((Timestamp)data.get("LASTUPDATED")).toLocalDateTime().toLocalDate());
@@ -103,6 +110,7 @@ public class PersonneDto {
 			setPrenom((String) data.getPrenom());
 			setTelephone((String) data.getTelephone());
 			setDateNaissance(data.getDateNaissance());
+			setEmail(data.getEmail());
 
 			setLastUpdated(data.getLastUpdated());
 			setUpdatedBy((String) data.getUpdatedBy());

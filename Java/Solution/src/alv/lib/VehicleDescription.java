@@ -54,7 +54,7 @@ public class VehicleDescription extends VehicleDescriptionDto {
 	}
 
 	//this method will be used when the object is a child of VehicleDescriptions
-	public static VehicleDescription load(Map<String, Object> data) {
+	protected static VehicleDescription load(Map<String, Object> data) {
 		VehicleDescription res = new VehicleDescription();
 		res.loadProperties(data);
 		

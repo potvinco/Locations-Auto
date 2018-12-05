@@ -128,7 +128,7 @@ public class Location extends LocationDto {
 	}
 
 	// this method will be used when the object is a child of Locations
-	public static Location load(Map<String, Object> data) {
+	protected static Location load(Map<String, Object> data) {
 		Location res = new Location();
 		res.loadProperties(data);
 
