@@ -68,13 +68,14 @@ public class PersonneDAL extends ConnectionAdapter implements IPersonneDAL {
 			try {
 
 				CallableStatement cstmt = connection.prepareCall(
-						"INSERT INTO tblPersonne ( Nom, Prenom, Telephone, DateNaissance, AdresseId) VALUES( ?, ?, ?, ?, ?)");
+						"INSERT INTO tblPersonne ( Nom, Prenom, Telephone, DateNaissance, AdresseId, Email) VALUES( ?, ?, ?, ?, ?, ?)");
 
 				cstmt.setString(1, dto.getNom());
 				cstmt.setString(2, dto.getPrenom());
 				cstmt.setString(3, dto.getTelephone());
 				cstmt.setDate(4, Date.valueOf(dto.getDateNaissance()));
 				cstmt.setInt(5, dto.getAdresseId());
+				cstmt.setString(6, dto.getEmail());
 				cstmt.executeUpdate();
 
 				// SELECT NEW ID
@@ -120,14 +121,15 @@ public class PersonneDAL extends ConnectionAdapter implements IPersonneDAL {
 			try {
 
 				CallableStatement cstmt = connection.prepareCall(
-						"UPDATE tblPersonne SET Nom = ?, Prenom = ?, Telephone = ?, DateNaissance = ?, AdresseId = ? WHERE Id = ?");
+						"UPDATE tblPersonne SET Nom = ?, Prenom = ?, Telephone = ?, DateNaissance = ?, AdresseId = ?, Email = ? WHERE Id = ?");
 
 				cstmt.setString(1, dto.getNom());
 				cstmt.setString(2, dto.getPrenom());
 				cstmt.setString(3, dto.getTelephone());
 				cstmt.setDate(4, Date.valueOf(dto.getDateNaissance()));
 				cstmt.setInt(5, dto.getAdresseId());
-				cstmt.setInt(6, dto.getId());
+				cstmt.setString(6, dto.getEmail());
+				cstmt.setInt(7, dto.getId());
 				cstmt.executeUpdate();
 
 			} catch (SQLException e) {

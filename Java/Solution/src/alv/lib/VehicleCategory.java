@@ -53,7 +53,7 @@ public class VehicleCategory extends VehicleCategoryDto {
 	}
 
 	//this method will be used when the object is a child of Personnes
-	public static VehicleCategory load(Map<String, Object> data) {
+	protected static VehicleCategory load(Map<String, Object> data) {
 		VehicleCategory res = new VehicleCategory();
 		res.loadProperties(data);
 		

@@ -65,9 +65,10 @@ public class ReservationDAL extends ConnectionAdapter implements IReservationDAL
 			try {
 
 				CallableStatement cstmt = connection.prepareCall(
-						"INSERT INTO tblReservation ( Nom, Prenom, Telephone, DateNaissance) VALUES( ?, ?, ?, ?)");
+						"INSERT INTO tblReservation ( PersonneId, VehiculeId, CategoryId, StartDt, EndDt, AssuranceOptionId, KmOptionId) VALUES( ?, ?, ?, ?, ?, ?, ?)");
 
 				cstmt.setInt(1, dto.getPersonneId());
+				cstmt.setInt(1, dto.getVehiculeId());
 				cstmt.setInt(2, dto.getCategoryId());
 				cstmt.setDate(3, Date.valueOf(dto.getStartDt()));
 				cstmt.setDate(4, Date.valueOf(dto.getEndDt()));
@@ -120,15 +121,16 @@ public class ReservationDAL extends ConnectionAdapter implements IReservationDAL
 			try {
 
 				CallableStatement cstmt = connection.prepareCall(
-						"UPDATE tblReservation SET Nom = ?, Prenom = ?, Telephone = ?, DateNaissance = ? WHERE Id = ?");
+						"UPDATE tblReservation SET  PersonneId = ? , VehiculeId = ? , CategoryId = ? , StartDt = ? , EndDt = ? , AssuranceOptionId = ? , KmOptionId = ? WHERE Id = ?");
 
 				cstmt.setInt(1, dto.getPersonneId());
-				cstmt.setInt(2, dto.getCategoryId());
-				cstmt.setDate(3, Date.valueOf( dto.getStartDt()));
-				cstmt.setDate(4, Date.valueOf(dto.getEndDt()));
-				cstmt.setBoolean(5, dto.getAssuranceOption());
-				cstmt.setBoolean(6, dto.getKmOption());
-				cstmt.setInt(7, dto.getId());
+				cstmt.setInt(2, dto.getVehiculeId());
+				cstmt.setInt(3, dto.getCategoryId());
+				cstmt.setDate(4, Date.valueOf( dto.getStartDt()));
+				cstmt.setDate(5, Date.valueOf(dto.getEndDt()));
+				cstmt.setBoolean(6, dto.getAssuranceOption());
+				cstmt.setBoolean(7, dto.getKmOption());
+				cstmt.setInt(8, dto.getId());
 				cstmt.executeUpdate();
 
 			} catch (SQLException e) {

@@ -52,7 +52,7 @@ public class Province extends ProvinceDto {
 		}
 	}
 
-	public static Province load(Map<String, Object> data) {
+	protected static Province load(Map<String, Object> data) {
 		Province res = new Province();
 		res.loadProperties(data);
 

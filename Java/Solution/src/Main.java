@@ -1,13 +1,31 @@
 import java.time.*;
+
+import alv.lib.CurrentUser;
 import alv.lib.Personne;
 import alv.lib.Reservation;
 import alv.lib.Reservations;
 
 public class Main {
 	public static void main(String[] args) {
-		Test_Reservations();
-		Test_Reservation();
-		Test_Personne();
+		System.out.println(System.getProperty("user.name"));
+		System.out.println(System.getProperty("user.home"));
+
+		Test_CurrentUser();
+		
+		
+		
+		
+//		Test_Reservations();
+//		Test_Reservation();
+//		Test_Personne();
+	}
+	
+	private static void Test_CurrentUser() {
+		System.out.println(CurrentUser.Login("Owner", "password"));
+		System.out.println(CurrentUser.getIdentity().isInRole("ssss"));
+		CurrentUser.Logout();
+		System.out.println(CurrentUser.Login("OTHER", "password"));
+		System.out.println(CurrentUser.getIdentity());
 	}
 	
 	private static void Test_Reservations() {

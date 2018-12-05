@@ -65,7 +65,7 @@ public class Personne extends PersonneDto {
 	}
 
 	//this method will be used when the object is a child of Personnes
-	public static Personne load(Map<String, Object> data) {
+	protected static Personne load(Map<String, Object> data) {
 		Personne res = new Personne();
 		res.loadProperties(data);
 		

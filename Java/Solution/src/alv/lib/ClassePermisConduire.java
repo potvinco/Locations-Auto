@@ -51,7 +51,8 @@ public class ClassePermisConduire extends ClassePermisConduireDto {
 			e.printStackTrace();
 		}
 	}
-	public static ClassePermisConduire load(Map<String, Object> data) {
+	
+	protected static ClassePermisConduire load(Map<String, Object> data) {
 		ClassePermisConduire res = new ClassePermisConduire();
 		res.loadProperties(data);
 
