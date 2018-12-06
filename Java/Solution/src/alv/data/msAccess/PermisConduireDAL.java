@@ -73,8 +73,18 @@ public class PermisConduireDAL extends ConnectionAdapter implements IPermisCondu
 				cstmt.setInt(3, dto.getCountryId());
 				cstmt.setInt(4, dto.getProvinceId());
 				cstmt.setInt(5, dto.getClassePermisConduireId());
-				cstmt.setDate(6, Date.valueOf(dto.getDateExpiration()));
-				cstmt.setDate(7, Date.valueOf(dto.getDateEmission()));
+				//cstmt.setDate(6, Date.valueOf(dto.getDateExpiration()));
+				if(dto.getDateExpiration()==null)
+					cstmt.setNull(6,java.sql.Types.DATE);
+				else
+					cstmt.setDate(6,Date.valueOf(dto.getDateExpiration()));
+				
+				
+				//cstmt.setDate(7, Date.valueOf(dto.getDateEmission()));
+				if(dto.getDateEmission()==null)
+					cstmt.setNull(7,java.sql.Types.DATE);
+				else
+					cstmt.setDate(7,Date.valueOf(dto.getDateEmission()));
 				cstmt.executeUpdate();
 
 				// SELECT NEW ID
@@ -127,8 +137,17 @@ public class PermisConduireDAL extends ConnectionAdapter implements IPermisCondu
 				cstmt.setInt(3, dto.getCountryId());
 				cstmt.setInt(4, dto.getProvinceId());
 				cstmt.setInt(5, dto.getClassePermisConduireId());
-				cstmt.setDate(6, Date.valueOf(dto.getDateExpiration()));
-				cstmt.setDate(7, Date.valueOf(dto.getDateEmission()));
+				//cstmt.setDate(6, Date.valueOf(dto.getDateExpiration()));
+				if(dto.getDateExpiration()==null)
+					cstmt.setNull(6,java.sql.Types.DATE);
+				else
+					cstmt.setDate(6,Date.valueOf(dto.getDateExpiration()));
+				
+				//cstmt.setDate(7, Date.valueOf(dto.getDateEmission()));
+				if(dto.getDateEmission()==null)
+					cstmt.setNull(7,java.sql.Types.DATE);
+				else
+					cstmt.setDate(7,Date.valueOf(dto.getDateEmission()));
 				cstmt.setInt(8, dto.getId());
 				cstmt.executeUpdate();
 

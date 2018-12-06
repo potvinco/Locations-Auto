@@ -74,8 +74,11 @@ public class FicheInspectionDAL extends ConnectionAdapter implements IFicheInspe
 				cstmt.setString(2, dto.getDescription());
 				cstmt.setInt(3, dto.getCoutDommages());
 				cstmt.setInt(4, dto.getLitreCarburant());
-				cstmt.setDate(5, Date.valueOf(dto.getInspectionDt()));
-				
+				//cstmt.setDate(5, Date.valueOf(dto.getInspectionDt()));
+				if(dto.getInspectionDt()==null)
+					cstmt.setNull(5,java.sql.Types.DATE);
+				else
+					cstmt.setDate(5,Date.valueOf(dto.getInspectionDt()));
 				cstmt.executeUpdate();
 
 				// SELECT NEW ID
@@ -127,7 +130,13 @@ public class FicheInspectionDAL extends ConnectionAdapter implements IFicheInspe
 				cstmt.setString(2, dto.getDescription());
 				cstmt.setInt(3, dto.getCoutDommages());
 				cstmt.setInt(4, dto.getLitreCarburant());
-				cstmt.setDate(5, Date.valueOf(dto.getInspectionDt()));
+				//cstmt.setDate(5, Date.valueOf(dto.getInspectionDt()));
+				
+				if(dto.getInspectionDt()==null)
+					cstmt.setNull(5,java.sql.Types.DATE);
+				else
+					cstmt.setDate(5,Date.valueOf(dto.getInspectionDt()));
+				
 				cstmt.setInt(6, dto.getId());
 				cstmt.executeUpdate();
 
