@@ -13,8 +13,8 @@ public class Main {
 //		Test_CurrentUser();
 	
 //		Test_Reservations();
-		Test_Reservation();
-//		Test_Personne();
+//		Test_Reservation();
+		Test_Personne();
 	}
 	
 	private static void Test_CurrentUser() {
@@ -70,6 +70,7 @@ public class Main {
 		per.getAdresse().setAdresse("new address value");
 		LocalDate date = LocalDate.now();
 		per.setDateNaissance(date);
+		per.setEmail("email address");
 		per.save();
 		System.out.println(per.getId());
 		System.out.println(per.getNom());
@@ -79,18 +80,18 @@ public class Main {
 		
 		int personeId = per.getId();
 
-		per = Personne.load(personeId);
-		System.out.println(per.getNom());
-		per.setNom("updated nom 2");
-		per.save();
-		per = null;
-		
-		per = Personne.load(personeId);
-		System.out.println(per.getNom());
-		per = null;
-		
 //		per = Personne.load(personeId);
-//		per.delete();
-//		System.out.println(per.getId());
+//		System.out.println(per.getNom());
+//		per.setNom("updated nom 2");
+//		per.save();
+//		per = null;
+//		
+//		per = Personne.load(personeId);
+//		System.out.println(per.getNom());
+//		per = null;
+//		
+////		per = Personne.load(personeId);
+////		per.delete();
+////		System.out.println(per.getId());
 	}
 }

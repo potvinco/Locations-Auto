@@ -69,9 +69,18 @@ public class RetourLocationDAL extends ConnectionAdapter implements IRetourLocat
 
 				cstmt.setInt(1, dto.getLocationId());
 				cstmt.setInt(2, dto.getFicheInspectionId());
-				cstmt.setDate(3, Date.valueOf(dto.getRetourDt()));
+				//cstmt.setDate(3, Date.valueOf(dto.getRetourDt()));
+				if(dto.getRetourDt()==null)
+					cstmt.setNull(3,java.sql.Types.DATE);
+				else
+					cstmt.setDate(3,Date.valueOf(dto.getRetourDt()));
 				
-				cstmt.setDate(4, Date.valueOf(dto.getLastUpdated()));
+				//cstmt.setDate(4, Date.valueOf(dto.getLastUpdated()));
+				if(dto.getLastUpdated()==null)
+					cstmt.setNull(4,java.sql.Types.DATE);
+				else
+					cstmt.setDate(4,Date.valueOf(dto.getLastUpdated()));
+				
 				cstmt.setString(5, dto.getUpdatedBy());
 				
 				
@@ -124,8 +133,17 @@ public class RetourLocationDAL extends ConnectionAdapter implements IRetourLocat
 
 				cstmt.setInt(1, dto.getLocationId());
 				cstmt.setInt(2, dto.getFicheInspectionId());
-				cstmt.setDate(3, Date.valueOf(dto.getRetourDt()));
-				cstmt.setDate(4, Date.valueOf(dto.getLastUpdated()));
+				//cstmt.setDate(3, Date.valueOf(dto.getRetourDt()));
+				if(dto.getRetourDt()==null)
+					cstmt.setNull(3,java.sql.Types.DATE);
+				else
+					cstmt.setDate(3,Date.valueOf(dto.getRetourDt()));
+				
+				//cstmt.setDate(4, Date.valueOf(dto.getLastUpdated()));
+				if(dto.getLastUpdated()==null)
+					cstmt.setNull(4,java.sql.Types.DATE);
+				else
+					cstmt.setDate(4,Date.valueOf(dto.getLastUpdated()));
 				cstmt.setString(5, dto.getUpdatedBy());
 				
 				cstmt.setInt(6, dto.getId());

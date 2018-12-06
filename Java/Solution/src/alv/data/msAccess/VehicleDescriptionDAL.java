@@ -69,7 +69,7 @@ public class VehicleDescriptionDAL extends ConnectionAdapter implements IVehicle
 				CallableStatement cstmt = connection.prepareCall(
 						"INSERT INTO tblDescVehicule( Description) VALUES( ?)");
 
-				//cstmt.setString(1, dto.getDescription());
+				cstmt.setString(1, "");
 				
 				cstmt.executeUpdate();
 
@@ -118,9 +118,9 @@ public class VehicleDescriptionDAL extends ConnectionAdapter implements IVehicle
 				CallableStatement cstmt = connection.prepareCall(
 						"UPDATE tblDescVehicule SET Description = ? WHERE Id = ?");
 
-				//cstmt.setString(1, dto.getDescription());
+				cstmt.setString(1, "");
 
-				cstmt.setInt(6, dto.getId());
+				cstmt.setInt(2, dto.getId());
 				cstmt.executeUpdate();
 
 			} catch (SQLException e) {
