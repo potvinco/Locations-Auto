@@ -73,7 +73,11 @@ public class PersonneDAL extends ConnectionAdapter implements IPersonneDAL {
 				cstmt.setString(1, dto.getNom());
 				cstmt.setString(2, dto.getPrenom());
 				cstmt.setString(3, dto.getTelephone());
-				cstmt.setDate(4, Date.valueOf(dto.getDateNaissance()));
+				if(dto.getDateNaissance()==null)
+					cstmt.setNull(4,java.sql.Types.DATE);
+				else
+					cstmt.setDate(4,Date.valueOf(dto.getDateNaissance()));
+				
 				cstmt.setInt(5, dto.getAdresseId());
 				cstmt.setString(6, dto.getEmail());
 				cstmt.executeUpdate();
