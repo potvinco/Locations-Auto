@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -68,13 +69,28 @@ public class ReservationDAL extends ConnectionAdapter implements IReservationDAL
 						"INSERT INTO tblReservation ( PersonneId, VehiculeId, CategoryId, StartDt, EndDt, AssuranceOptionId, KmOptionId) VALUES( ?, ?, ?, ?, ?, ?, ?)");
 
 				cstmt.setInt(1, dto.getPersonneId());
-				cstmt.setInt(1, dto.getVehiculeId());
-				cstmt.setInt(2, dto.getCategoryId());
-				cstmt.setDate(3, Date.valueOf(dto.getStartDt()));
-				cstmt.setDate(4, Date.valueOf(dto.getEndDt()));
-				cstmt.setBoolean(5, dto.getAssuranceOption());
-				cstmt.setBoolean(6, dto.getKmOption());
+				cstmt.setInt(2, dto.getVehiculeId());
+				cstmt.setInt(3, dto.getCategoryId());
 				
+				if(dto.getStartDt() == null)
+				{
+					cstmt.setNull(4,java.sql.Types.DATE);}
+				else
+				{
+					cstmt.setDate(4,Date.valueOf(dto.getStartDt()));
+				}
+
+				
+				if(dto.getEndDt() == null)
+				{
+					cstmt.setNull(5,java.sql.Types.DATE);}
+				else
+				{
+					cstmt.setDate(5,Date.valueOf(dto.getEndDt()));
+				}
+				
+				cstmt.setBoolean(6, (boolean)dto.getAssuranceOption());
+				cstmt.setBoolean(7, dto.getKmOption());
 				
 				cstmt.executeUpdate();
 

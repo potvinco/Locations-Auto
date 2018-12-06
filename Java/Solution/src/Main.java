@@ -10,18 +10,16 @@ public class Main {
 		System.out.println(System.getProperty("user.name"));
 		System.out.println(System.getProperty("user.home"));
 
-		Test_CurrentUser();
-		
-		
-		
-		
+//		Test_CurrentUser();
+	
 //		Test_Reservations();
-//		Test_Reservation();
+		Test_Reservation();
 //		Test_Personne();
 	}
 	
 	private static void Test_CurrentUser() {
 		System.out.println(CurrentUser.Login("Owner", "password"));
+		System.out.println(CurrentUser.getIdentity().isInRole("admin"));
 		System.out.println(CurrentUser.getIdentity().isInRole("ssss"));
 		CurrentUser.Logout();
 		System.out.println(CurrentUser.Login("OTHER", "password"));
@@ -47,7 +45,19 @@ public class Main {
 		
 		Reservation res = Reservation.load(1);
 		System.out.println(res.getId());
-		System.out.println(res.getCategoryId());		
+		System.out.println(res.getCategoryId());
+		
+		
+		
+		
+		
+		Reservation newRes = Reservation.create();
+		newRes.getPersonne().setNom("Ali");
+		newRes.setStartDt(LocalDate.now());
+		newRes.setEndDt(LocalDate.now());
+		
+		
+		newRes.save();
 	}
 
 	private static void Test_Personne() {
@@ -67,18 +77,18 @@ public class Main {
 		System.out.println(per.getAdresse().getAdresse());
 		
 		
-//		int personeId = per.getId();
-//
-//		per = Personne.load(personeId);
-//		System.out.println(per.getNom());
-//		per.setNom("updated nom 2");
-//		per.save();
-//		per = null;
-//		
-//		per = Personne.load(personeId);
-//		System.out.println(per.getNom());
-//		per = null;
-//		
+		int personeId = per.getId();
+
+		per = Personne.load(personeId);
+		System.out.println(per.getNom());
+		per.setNom("updated nom 2");
+		per.save();
+		per = null;
+		
+		per = Personne.load(personeId);
+		System.out.println(per.getNom());
+		per = null;
+		
 //		per = Personne.load(personeId);
 //		per.delete();
 //		System.out.println(per.getId());
