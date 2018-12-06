@@ -15,7 +15,6 @@ public class Vehicule extends VehiculeDto {
 	Connection conn;
 	private VehiculeDAL dal;
 	private VehicleDescription _vehicleDescription;
-
 	//PROPERTIES
 	
 	@Override
@@ -34,6 +33,7 @@ public class Vehicule extends VehiculeDto {
 		initConnection();
 		dal = new VehiculeDAL(conn);
 		loadProperties(dal.fetch(id));
+		
 	}
 
 	public VehicleDescription getVehicleDescription() {
