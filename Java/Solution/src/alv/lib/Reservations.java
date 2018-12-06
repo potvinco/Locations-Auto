@@ -24,9 +24,24 @@ public class Reservations {
 		map.forEach(item -> {items.add(Reservation.load(item));});
 	}
 	
+	private Reservations(Vehicule vehicule) {
+		initConnection();
+		dal = new ReservationsDAL(conn);
+		ArrayList<Map<String, Object>> map = (ArrayList<Map<String, Object>>) dal.fetch();
+		map.forEach(item -> {
+			int val = ((int)item.get("VEHICULEID"));
+			if(val == vehicule.getId())
+				items.add(Reservation.load(item));
+			});
+	}
+	
 	//FACTORY METHODS
 	public static Reservations load() {
 		return new Reservations();
+	}
+	
+	public static Reservations load(Vehicule vehicule) {
+		return new Reservations(vehicule);
 	}
 
 	//METHODS
@@ -56,8 +71,8 @@ public class Reservations {
 		return items;
 	}
 
-	public void setItems(ArrayList<Reservation> items) {
-		this.items = items;
-	}
+//	private void setItems(ArrayList<Reservation> items) {
+//		this.items = items;
+//	}
 
 }
