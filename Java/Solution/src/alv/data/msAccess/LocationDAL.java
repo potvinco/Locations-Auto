@@ -69,7 +69,7 @@ public class LocationDAL extends ConnectionAdapter implements ILocationDAL {
 
 				cstmt.setBoolean(1, dto.getKmOption());
 				cstmt.setBoolean(2, dto.getAssuranceOption());
-				//cstmt.setDate(3, Date.valueOf(dto.getLocationDt()));
+
 				if(dto.getLocationDt()==null)
 					cstmt.setNull(3,java.sql.Types.DATE);
 				else

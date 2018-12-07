@@ -33,7 +33,6 @@ public class Vehicule extends VehiculeDto {
 		initConnection();
 		dal = new VehiculeDAL(conn);
 		loadProperties(dal.fetch(id));
-		
 	}
 
 	public VehicleDescription getVehicleDescription() {

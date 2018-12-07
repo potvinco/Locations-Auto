@@ -1,5 +1,5 @@
 package alv.lib;
-
+import java.time.temporal.ChronoUnit;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -23,11 +23,11 @@ public class Location extends LocationDto {
 	private LocationDAL dal;
 
 	// PROPERTIES
-	@Override 
-	public void setLocationDt(LocalDate date)
-	{
-		
-	}	
+//	@Override 
+//	public void setLocationDt(LocalDate date)
+//	{
+//		
+//	}	
 
 	@Override 
 	public void setVehicleId(int id)
@@ -102,7 +102,25 @@ public class Location extends LocationDto {
 	// METHODS
 	public int calculatePrice()
 	{
-		return 0;
+		//identify Reservation
+		Reservation res=  Reservation.load(this.getReservationId());
+		VehicleCategory cat = VehicleCategory.load(this.getVehicule().getVehicleDescription().getCategoryId());
+		
+		int prixAssurance = 18;
+		int prixKm = 11;
+		
+		//calculate duration in days
+		long daysBetween = java.time.temporal.ChronoUnit.DAYS.between(res.getStartDt(), res.getEndDt());
+		
+		if(this.getAssuranceOption())
+			prixAssurance = (prixAssurance * (int)daysBetween);
+			
+		if(this.getKmOption())
+			prixKm = (prixKm * (int)daysBetween);
+		
+		int prixBase = cat.getPrixLocation()  * (int)daysBetween;
+		
+		return prixBase + prixAssurance + prixKm;
 	}
 	
 	private void initConnection() {
