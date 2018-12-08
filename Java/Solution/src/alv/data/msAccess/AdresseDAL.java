@@ -65,11 +65,11 @@ public class AdresseDAL extends ConnectionAdapter implements IAdresseDAL {
 			try {
 
 				CallableStatement cstmt = connection.prepareCall(
-						"INSERT INTO tblAdresse ( Adresse, Ville, ProvinceId, CodePostal) VALUES( ?, ?, ?, ?)");
+						"INSERT INTO tblAdresse ( Adresse, Ville, Province, CodePostal) VALUES( ?, ?, ?, ?)");
 
 				cstmt.setString(1, dto.getAdresse());
 				cstmt.setString(2, dto.getVille());
-				cstmt.setInt(3, dto.getProvinceId());
+				cstmt.setString(3, dto.getProvince());
 				cstmt.setString(4, dto.getCodePostal());
 				cstmt.executeUpdate();
 
@@ -116,11 +116,11 @@ public class AdresseDAL extends ConnectionAdapter implements IAdresseDAL {
 			try {
 
 				CallableStatement cstmt = connection.prepareCall(
-						"UPDATE tblAdresse SET Adresse = ?, Ville = ?, ProvinceId = ?, CodePostal = ? WHERE Id = ?");
+						"UPDATE tblAdresse SET Adresse = ?, Ville = ?, Province = ?, CodePostal = ? WHERE Id = ?");
 
 				cstmt.setString(1, dto.getAdresse());
 				cstmt.setString(2, dto.getVille());
-				cstmt.setInt(3, dto.getProvinceId());
+				cstmt.setString(3, dto.getProvince());
 				cstmt.setString(4, dto.getCodePostal());
 				cstmt.setInt(5, dto.getId());
 				cstmt.executeUpdate();

@@ -70,8 +70,8 @@ public class PermisConduireDAL extends ConnectionAdapter implements IPermisCondu
 
 				cstmt.setString(1, dto.getNumero());
 				cstmt.setInt(2, dto.getPersonneId());
-				cstmt.setInt(3, dto.getCountryId());
-				cstmt.setInt(4, dto.getProvinceId());
+				cstmt.setString(3, dto.getCountry());
+				cstmt.setString(4, dto.getProvince());
 				cstmt.setInt(5, dto.getClassePermisConduireId());
 				//cstmt.setDate(6, Date.valueOf(dto.getDateExpiration()));
 				if(dto.getDateExpiration()==null)
@@ -134,8 +134,8 @@ public class PermisConduireDAL extends ConnectionAdapter implements IPermisCondu
 
 				cstmt.setString(1, dto.getNumero());
 				cstmt.setInt(2, dto.getPersonneId());
-				cstmt.setInt(3, dto.getCountryId());
-				cstmt.setInt(4, dto.getProvinceId());
+				cstmt.setString(3, dto.getCountry());
+				cstmt.setString(4, dto.getProvince());
 				cstmt.setInt(5, dto.getClassePermisConduireId());
 				//cstmt.setDate(6, Date.valueOf(dto.getDateExpiration()));
 				if(dto.getDateExpiration()==null)

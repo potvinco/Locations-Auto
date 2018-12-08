@@ -15,6 +15,8 @@ public class LocationDto {
 	protected int _vehicleId;
 	protected int _ficheInspectionId;
 	protected LocalDate _LocationDt;
+
+	protected int _Km;
 	
 	protected String _TPSNo;
 	protected String _TVQNo;
@@ -139,6 +141,14 @@ public class LocationDto {
 		this._reservationId = _reservationId;
 	}
 
+	public int getKm() {
+		return _Km;
+	}
+
+	public void setKm(int _Km) {
+		this._Km = _Km;
+	}
+
 	public String getUpdatedBy() {
 		return _updatedBy;
 	}
@@ -170,7 +180,8 @@ public class LocationDto {
 			
 			setTPSNo((String) data.get("TPSNO"));
 			setTVQNo((String) data.get("TVQNO"));
-			
+
+			setKm((int) data.get("KM"));
 			setKmOption((boolean) data.get("KMOPTION"));
 			setAssuranceOption((boolean) data.get("ASSURANCEOPTION"));
 			
@@ -193,7 +204,8 @@ public class LocationDto {
 
 			setTPSNo((String) data.getTPSNo());
 			setTVQNo((String) data.getTVQNo());
-			
+
+			setKm((int) data.getKm());
 			setKmOption((boolean) data.getKmOption());
 			setAssuranceOption((boolean) data.getAssuranceOption());
 			
