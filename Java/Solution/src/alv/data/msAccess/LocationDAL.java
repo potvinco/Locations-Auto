@@ -65,23 +65,24 @@ public class LocationDAL extends ConnectionAdapter implements ILocationDAL {
 			try {
 
 				CallableStatement cstmt = connection.prepareCall(
-						"INSERT INTO tblLocation ( KmOption, AssuranceOption, LocationDt, LastUpdated, UpdatedBy) VALUES( ?, ?, ?, ?, ?)");
+						"INSERT INTO tblLocation ( Km, KmOption, AssuranceOption, LocationDt, LastUpdated, UpdatedBy) VALUES(?, ?, ?, ?, ?, ?)");
 
-				cstmt.setBoolean(1, dto.getKmOption());
-				cstmt.setBoolean(2, dto.getAssuranceOption());
+				cstmt.setInt(1, dto.getKm());
+				cstmt.setBoolean(2, dto.getKmOption());
+				cstmt.setBoolean(3, dto.getAssuranceOption());
 
 				if(dto.getLocationDt()==null)
-					cstmt.setNull(3,java.sql.Types.DATE);
+					cstmt.setNull(4,java.sql.Types.DATE);
 				else
-					cstmt.setDate(3,Date.valueOf(dto.getLocationDt()));
+					cstmt.setDate(4,Date.valueOf(dto.getLocationDt()));
 				
 				//cstmt.setDate(4, Date.valueOf(dto.getLastUpdated()));
 				if(dto.getLastUpdated()==null)
-					cstmt.setNull(4,java.sql.Types.DATE);
+					cstmt.setNull(5,java.sql.Types.DATE);
 				else
-					cstmt.setDate(4,Date.valueOf(dto.getLastUpdated()));
+					cstmt.setDate(5,Date.valueOf(dto.getLastUpdated()));
 				
-				cstmt.setString(5, dto.getUpdatedBy());
+				cstmt.setString(6, dto.getUpdatedBy());
 				
 				
 				cstmt.executeUpdate();
@@ -129,15 +130,17 @@ public class LocationDAL extends ConnectionAdapter implements ILocationDAL {
 			try {
 
 				CallableStatement cstmt = connection.prepareCall(
-						"UPDATE tblLocation SET KmOption = ?, AssuranceOption = ?, LocationDt = ?, LastUpdated = ?, UpdatedBy = ? WHERE Id = ?");
+						"UPDATE tblLocation SET KmOption = ?, AssuranceOption = ?, LocationDt = ?, Km = ?, LastUpdated = ?, UpdatedBy = ? WHERE Id = ?");
 
 				cstmt.setBoolean(1, dto.getKmOption());
 				cstmt.setBoolean(2, dto.getAssuranceOption());
 				cstmt.setDate(3, Date.valueOf(dto.getLocationDt()));
-				cstmt.setDate(4, Date.valueOf(dto.getLastUpdated()));
-				cstmt.setString(5, dto.getUpdatedBy());
+
+				cstmt.setInt(4, dto.getKm());
+				cstmt.setDate(5, Date.valueOf(dto.getLastUpdated()));
+				cstmt.setString(6, dto.getUpdatedBy());
 				
-				cstmt.setInt(6, dto.getId());
+				cstmt.setInt(7, dto.getId());
 				cstmt.executeUpdate();
 
 			} catch (SQLException e) {

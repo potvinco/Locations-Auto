@@ -8,7 +8,7 @@ public class AdresseDto {
 	protected int _id;
 	protected String _adresse;
 	protected String _ville;
-	protected int _provinceId;
+	protected String _province;
 	protected String _codePostal;
 	protected String _updatedBy;
 	protected LocalDate _lastUpdated;
@@ -46,12 +46,12 @@ public class AdresseDto {
 		this._codePostal = _codePostal;
 	}
 
-	public int getProvinceId() {
-		return _provinceId;
+	public String getProvince() {
+		return _province;
 	}
 
-	public void setProvinceId(int id) {
-		this._provinceId = id;
+	public void setProvince(String province) {
+		this._province = province;
 	}
 
 	public String getUpdatedBy() {
@@ -77,7 +77,7 @@ public class AdresseDto {
 			setAdresse((String) data.get("ADRESSE"));
 			setVille((String) data.get("VILLE"));
 			setCodePostal((String) data.get("CODEPOSTAL"));
-			setProvinceId((int) data.get("PROVINCEID"));
+			setProvince((String) data.get("PROVINCE"));
 
 			setLastUpdated(data.get("LASTUPDATED") == null ? null : ((Timestamp)data.get("LASTUPDATED")).toLocalDateTime().toLocalDate());
 			setUpdatedBy((String) data.get("UPDATEDBY"));
@@ -90,7 +90,7 @@ public class AdresseDto {
 			setAdresse((String) data.getAdresse());
 			setVille((String) data.getVille());
 			setCodePostal((String) data.getCodePostal());
-			setProvinceId((int) data.getProvinceId());
+			setProvince((String) data.getProvince());
 
 			setLastUpdated(data.getLastUpdated());
 			setUpdatedBy((String) data.getUpdatedBy());

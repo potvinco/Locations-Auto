@@ -8,8 +8,8 @@ public class PermisConduireDto {
 	protected int _id;
 	protected int _personneId;
 	protected String _numero;
-	protected int _countryId;
-	protected int _provinceId;
+	protected String _country;
+	protected String _province;
 	protected int _classePermisConduireId;
 	protected LocalDate _dateExpiration;
 	protected LocalDate _dateEmission;
@@ -50,20 +50,20 @@ public class PermisConduireDto {
 		this._personneId = _personneId;
 	}
 
-	public int getCountryId() {
-		return _countryId;
+	public String getCountry() {
+		return _country;
 	}
 
-	public void setCountryId(int _countryId) {
-		this._countryId = _countryId;
+	public void setCountry(String _country) {
+		this._country = _country;
 	}
 
-	public int getProvinceId() {
-		return _provinceId;
+	public String getProvince() {
+		return _province;
 	}
 
-	public void setProvinceId(int _provinceId) {
-		this._provinceId = _provinceId;
+	public void setProvince(String _province) {
+		this._province = _province;
 	}
 
 	public LocalDate getDateExpiration() {
@@ -104,9 +104,9 @@ public class PermisConduireDto {
 			setId((int) data.get("ID"));
 			setNumero((String) data.get("NUMERO"));
 			setPersonneId((int) data.get("PERSONNEID"));
-			setCountryId((int) data.get("COUNTRYID"));
-			setProvinceId((int) data.get("PROVINCEID"));
-			setProvinceId((int) data.get("CLASSEPERMISCONDUIREID"));
+			setCountry((String) data.get("COUNTRY"));
+			setProvince((String) data.get("PROVINCE"));
+			setClassePermisConduireId((int) data.get("CLASSEPERMISCONDUIREID"));
 
 			setDateExpiration(data.get("DATEEXPIRATION") == null ? null : ((Timestamp)data.get("DATEEXPIRATION")).toLocalDateTime().toLocalDate());
 			setDateEmission(data.get("DATEEMISSION") == null ? null : ((Timestamp)data.get("DATEEMISSION")).toLocalDateTime().toLocalDate());
@@ -122,8 +122,8 @@ public class PermisConduireDto {
 			setId((int) data.getId());
 			setNumero((String) data.getNumero());
 			setPersonneId((int) data.getPersonneId());
-			setCountryId((int) data.getCountryId());
-			setProvinceId((int) data.getProvinceId());
+			setCountry((String) data.getCountry());
+			setProvince((String) data.getProvince());
 			setClassePermisConduireId((int) data.getClassePermisConduireId());
 			setDateExpiration(data.getDateExpiration());
 			setDateEmission(data.getDateEmission());
