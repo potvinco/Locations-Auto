@@ -7,6 +7,10 @@ import java.util.Map;
 public class VehicleDescriptionDto {
 	protected int _id;
 
+	protected int _annee;
+	protected int _categoryId;
+	protected int _classeId;
+	protected String _description;
 	protected String _updatedBy;
 	protected LocalDate _lastUpdated;
 
@@ -17,6 +21,38 @@ public class VehicleDescriptionDto {
 
 	protected void setId(int _id) {
 		this._id = _id;
+	}
+
+	public int getAnnee() {
+		return _annee;
+	}
+
+	public void setAnnee(int _annee) {
+		this._annee = _annee;
+	}
+
+	public int getClasseId() {
+		return _classeId;
+	}
+
+	public void setClasseId(int _classeId) {
+		this._classeId = _classeId;
+	}
+
+	public int getCategoryId() {
+		return _categoryId;
+	}
+
+	public void setCategoryId(int _categoryId) {
+		this._categoryId = _categoryId;
+	}
+
+	public String getDescription() {
+		return _description;
+	}
+
+	public void setDescription(String _description) {
+		this._description = _description;
 	}
 
 	public String getUpdatedBy() {
