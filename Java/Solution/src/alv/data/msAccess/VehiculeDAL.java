@@ -67,7 +67,7 @@ public class VehiculeDAL extends ConnectionAdapter implements IVehiculeDAL {
 			try {
 
 				CallableStatement cstmt = connection.prepareCall(
-						"INSERT INTO tblVehicule ( LookUpId, NoSerie, Immatriculation) VALUES( ?, ?, ?)");
+						"INSERT INTO tblVehicule ( DescriptionId, NoSerie, Immatriculation) VALUES( ?, ?, ?)");
 
 				cstmt.setInt(1, dto.getDescriptionId());
 				cstmt.setString(2, dto.getNoSerie());
@@ -117,7 +117,7 @@ public class VehiculeDAL extends ConnectionAdapter implements IVehiculeDAL {
 			try {
 
 				CallableStatement cstmt = connection.prepareCall(
-						"UPDATE tblVehicule SET LookUpId = ?, NoSerie = ?, Immatriculation = ? WHERE Id = ?");
+						"UPDATE tblVehicule SET DescriptionId = ?, NoSerie = ?, Immatriculation = ? WHERE Id = ?");
 
 				cstmt.setInt(1, dto.getDescriptionId());
 				cstmt.setString(2, dto.getNoSerie());
