@@ -16,10 +16,8 @@ import javax.swing.JComboBox;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JRadioButton;
-import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
-import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 public class Reservation {
