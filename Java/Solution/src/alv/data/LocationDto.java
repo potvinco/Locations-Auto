@@ -7,7 +7,7 @@ import java.util.Map;
 public class LocationDto {
 	protected int _id;
 
-	private String _contractNo;
+	protected String _contractNo;
 	protected int _reservationId;
 	protected int _personneId;
 	protected int _adresseId;

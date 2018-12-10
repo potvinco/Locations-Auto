@@ -26,7 +26,7 @@ public class Main {
 		
 		
 		
-		alv.ui.Location frm = new alv.ui.Location();
+		alv.ui.Acceuil frm = new alv.ui.Acceuil();
 		frm.main(null);
 	}
 	
