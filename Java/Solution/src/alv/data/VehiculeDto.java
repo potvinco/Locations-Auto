@@ -66,7 +66,7 @@ public class VehiculeDto {
 	public void loadProperties(Map<String, Object> data) {
 		if (data != null) {
 			setId((int) data.get("ID"));
-			setDescriptionId((int) data.get("LOOKUPID"));
+			setDescriptionId((int) data.get("DESCRIPTIONID"));
 			setNoSerie((String) data.get("NOSERIE"));
 			setImmatriculation((String) data.get("IMMAtRICULAtION"));
 

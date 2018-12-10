@@ -10,11 +10,19 @@ public class Main {
 		System.out.println(System.getProperty("user.name"));
 		System.out.println(System.getProperty("user.home"));
 
+		String string = "004 | 034556";
+		String[] parts = string.split("\\|");
+		String part1 = parts[0]; // 004
+		String part2 = parts[1]; // 034556
+		
+
+		System.out.println(part1.trim());
+		System.out.println(part2.trim());
 //		Test_CurrentUser();
 	
 //		Test_Reservations();
 //		Test_Reservation();
-		Test_Personne();
+	//	Test_Personne();
 	}
 	
 	private static void Test_CurrentUser() {
