@@ -7,22 +7,27 @@ import alv.lib.Reservations;
 
 public class Main {
 	public static void main(String[] args) {
-		System.out.println(System.getProperty("user.name"));
-		System.out.println(System.getProperty("user.home"));
+//		System.out.println(System.getProperty("user.name"));
+//		System.out.println(System.getProperty("user.home"));
 
-		String string = "004 | 034556";
-		String[] parts = string.split("\\|");
-		String part1 = parts[0]; // 004
-		String part2 = parts[1]; // 034556
-		
-
-		System.out.println(part1.trim());
-		System.out.println(part2.trim());
+//		String string = "004 | 034556";
+//		String[] parts = string.split("\\|");
+//		String part1 = parts[0]; // 004
+//		String part2 = parts[1]; // 034556
+//		
+//
+//		System.out.println(part1.trim());
+//		System.out.println(part2.trim());
 //		Test_CurrentUser();
 	
 //		Test_Reservations();
 //		Test_Reservation();
 	//	Test_Personne();
+		
+		
+		
+		alv.ui.Location frm = new alv.ui.Location();
+		frm.main(null);
 	}
 	
 	private static void Test_CurrentUser() {
