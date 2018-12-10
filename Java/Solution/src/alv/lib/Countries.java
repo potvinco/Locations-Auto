@@ -56,8 +56,8 @@ public class Countries {
 		return items;
 	}
 
-	public void setItems(ArrayList<Country> items) {
-		this.items = items;
-	}
+//	private void setItems(ArrayList<Country> items) {
+//		this.items = items;
+//	}
 
 }
