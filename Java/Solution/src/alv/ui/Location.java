@@ -100,8 +100,8 @@ public class Location extends JFrame {
 	public Location() {
 		setTitle("Location");
 		setResizable(false);
-		//backSize();
-		resize();
+		backSize();
+		//resize();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 
@@ -132,6 +132,7 @@ public class Location extends JFrame {
 						model.setValueAt(al.get(i).getPersonne().getPrenom(), 0, 2);
 						model.setValueAt(al.get(i).getPersonne().getTelephone(), 0, 3);
 						btnLocation.setEnabled(true);
+						break;
 					} else {
 						btnLocation.setEnabled(false);
 						backSize();
